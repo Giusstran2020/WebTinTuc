@@ -9,7 +9,7 @@
         }
         function SayHi(){
             $this->view("admin",[
-                "pages" => "home"
+                "pages" => "admin"
             ]);
         }
         function addCategory(){
