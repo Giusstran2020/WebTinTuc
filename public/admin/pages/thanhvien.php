@@ -14,16 +14,27 @@
                         <td class="td">Sửa</td>
                         <td class="td">Xóa</td>
                         </tr>
-                        <tr><td class='tdcon'>$row[username]</td>
-                            <td class='tdcon'>$row[hovaten]</td>
-                            <td class='tdcon'>$row[email]</td>
-                               <td class='tdcon'>$row[level]</td>
-                            <td class='tdcon'><a href="editThanhvien.html">Sửa</a></td>
-                            <td class='tdcon'><a href="#">Xóa</a></td>
-                       </tr>
+                        <?php
+                            $array = $data["ds"];
+                            $num = count($array);
+                            for($row = 0; $row < $num; $row++){
+                            echo"<tr><td class='tdcon'>".$array[$row][0]."</td>
+                                     <td class='tdcon'>".$array[$row][1]."</td>
+                                     <td class='tdcon'>".$array[$row][2]."</td>
+                                     <td class='tdcon'>".$array[$row][3]."</td>
+                                
+                                <td class='tdcon'><form action='./Get_user/".$array[$row][0]."' method = 'post'>
+                                                    <input type = 'submit' value = 'sửa'>
+                                                    </form>
+                                                    </td>
+                                <td class='tdcon'><a href=\'./deleteUser/777".$array[$row][0]."'\" onClick=\"return confirm('Bạn chắc chắn muốn xoá người dùng này?');\">Xóa</a></td>
+                                
+                            </tr>";
+                            }
+                        ?>
                     </tbody></table>
                 </div>
-                <form action="addThanhvien.html" class="form_add">
+                <form action="http://localhost:8080/lab-03/admin/addThanhvien" class="form_add">
                     <button class="add">Thêm</button>
                 </form>
             </div>

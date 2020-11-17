@@ -13,6 +13,9 @@
                         <td class="td">Sửa</td>
                         <td class="td">Xóa</td>
                         </tr>
+                        <?php
+                            
+                        ?>
                         <tr><td class='tdcon'>$row[tieude]</td>
                             <td class='tdcon'>$row[noidung]</td>
                             <td class='tdcon'>$row[hinhanh]</td>
