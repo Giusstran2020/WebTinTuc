@@ -12,9 +12,24 @@
                 "pages" => "admin"
             ]);
         }
-        function addCategory(){
+        function tieude(){
             $this->view("admin",[
-                "pages" => "category_add"
+                "pages" => "tieude"
+            ]);
+        }
+        function noidung(){
+            $this->view("admin",[
+                "pages" => "noidung"
+            ]);
+        }
+        function thanhvien(){
+            $this->view("admin",[
+                "pages" => "thanhvien"
+            ]);
+        }
+        function quangcao(){
+            $this->view("admin",[
+                "pages" => "quangcao"
             ]);
         }
     }

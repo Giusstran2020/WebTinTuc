@@ -14,7 +14,7 @@
                                 <i class="far fa-folder-open"></i>
                             </div>
                         </div>
-                                <a href="tieude.html" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="http://localhost:8080/lab-03/admin/tieude" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                     <div class="detail_title bg_info green hover_tieude"> 
                         <div class="box_x">
@@ -26,7 +26,7 @@
                                 <i class="fas fa-book-open"></i>
                             </div>
                     </div>
-                        <a href="noidung.html" class="small-box-footer green2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="http://localhost:8080/lab-03/admin/noidung" class="small-box-footer green2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                      </div>
                     <div class="detail_title bg_info yellow hover_tieude">
                         <div class="box_x">
@@ -38,7 +38,7 @@
                                 <i class="fas fa-ad"></i>
                             </div>
                         </div>    
-                        <a href="#" class="small-box-footer yellow2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="http://localhost:8080/lab-03/admin/quangcao" class="small-box-footer yellow2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                     <div class="detail_title bg_info red hover_tieude">
                         <div class="box_x">
@@ -50,7 +50,7 @@
                                 <i class="fas fa-address-card"></i>
                             </div>
                         </div>
-                        <a href="thanhvien.html" class="small-box-footer red2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="http://localhost:8080/lab-03/admin/thanhvien" class="small-box-footer red2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

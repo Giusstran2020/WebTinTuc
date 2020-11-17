@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Trang đọc báo 
-</body>
-</html>
+<?php
+//require('./public/admin/layouts/header.php');
+
+require('./public/user/pages/'.$data['pages'].'.php');
+
+//require('./public/admin/layouts/footer.php');
+?>

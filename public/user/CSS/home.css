@@ -1,0 +1,175 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.quangcao_top{
+    height: 300px;
+    width: 1024;
+    background-color: rgb(168, 166, 166);
+    text-align: center;
+    margin-bottom: 3%;
+}
+.menubar{
+    height: 52px;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+.logo{
+    width: 5%;
+    float: left;
+    padding: 30px 20px 0px 20px;
+}
+.menu{
+    width: 70%;
+    float: left;
+    padding-bottom: 32px;
+}
+.search{
+    width: 15%;
+    float: left;
+}
+.login{
+    width: 5%;
+    float: left;
+}
+/*css cho thanh menu*/
+.search{
+    position: relative;
+}
+.menu{
+    border-bottom:0.5px solid rgb(214, 213, 213);
+}
+.menu ul{
+    float: left;
+}
+.menu ul li{
+    list-style: none;
+    display:inline-block;
+}
+.menu ul li a{
+    text-decoration: none;
+    padding: 30px 20px 30px 20px;
+    color: black;
+}
+.menu ul li a:hover{
+    color: rgb(92, 156, 246);
+    border-bottom: 5px solid rgb(92, 156, 246);
+}
+/*CSS thanh search*/
+.search{
+    padding-top: -2px;
+}
+.container-search{
+    position: relative;
+}
+.btn-search{
+    background: url(images/icon-search.png) no-repeat;
+    display: inline-block;
+    padding-right: 25px;
+    padding-bottom: 10px;
+    border: 0;
+    cursor: pointer;
+    position: absolute;
+    top:2px;
+    left: 150px;
+}
+.txt-search{
+   font-size: 16px;
+   padding: 5px;
+   border: white;
+}
+/*login*/
+.login a{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+/*content*/
+.content{
+  height: 400px;
+  margin-top: 5%;
+  border-bottom:1px solid black ;
+}
+.width_6{
+    width: 60%;
+    float: left;
+}   
+.width_3{
+    width: 30%;
+    float: left;
+}   
+.width_5{
+    width: 50%;
+    float: left;
+}
+.width_4{
+    width: 40%;
+    float: left;
+}
+.width_2{
+    width: 20%;
+    float: left;
+}
+.width_1{
+    width: 10%;
+    float: left;
+}
+.width_7{
+    width: 70%;
+    float: left;
+}
+.height{
+    height: 30%;
+}
+/*center news*/
+.img-big{
+    width: 100%;
+    height: 300px;
+    background-color: rgb(168, 166, 166);
+}
+.img-news{
+    width: 100%;
+    height: 80px;
+    background-color: rgb(168, 166, 166);
+    margin-bottom: 10%;
+}
+.colum-2-news{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1%;
+}
+.text-title{
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+.img-medium{
+    width: 100%;
+    height: 100px;
+    background-color: rgb(168, 166, 166);
+}
+/*cot chi tiet*/
+.img-news-2{
+    width: 100%;
+    height: 200px;
+    background-color: rgb(168, 166, 166);
+    margin-bottom: 10%;
+}
+.muctieu{
+    margin-top: 10px;
+    height: 1700px;
+}
+.img-qc{
+    width: 50%;
+    height: 500px;
+    background-color: rgb(168, 166, 166);
+    margin-bottom: 20px;
+}
+.contact_us{
+    text-align: center;
+    text-decoration: none;
+    padding-bottom: 20px;
+}
