@@ -24,9 +24,9 @@
     <h3> 
     <?php
         if($data["result"]=="true"){
-            echo "Đăng kí thành công";
+            echo "Thêm thành công";
         }
-        else {echo "Đăng kí thất bại";}
+        else {echo "Thêm thất bại";}
     ?>
     </h3>
 <?php }?>

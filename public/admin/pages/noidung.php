@@ -23,9 +23,9 @@
                             <td class='tdcon'><a href="#">Xóa</a></td>
                        </tr>
                     </tbody></table>
-                <form action="addnoidung.html" class="noidung" name="form_noidung">
+                <form action="addnoidung" class="noidung" name="form_add_title" method="post">
                     <label for="tieude" class="input_left">Chọn tiêu đề:</label>
-                    <input name="tieude" type="text" class="input_right" placeholder="Tên tiêu đề" value="">
+                    <input name="txt" type="text" class="input_right" placeholder="Tên tiêu đề" value="">
                     <p id="thongbao"></p>
                     <button class="add" onclick="return kiemtradangnhap()">Tìm kiếm</button>
                 </form>

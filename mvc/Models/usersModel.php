@@ -53,7 +53,6 @@
              return json_encode($kq);
         }
         public function Insert_user($fullname,$username,$password,$email,$level){
-            echo $fullname.$username.$password.$email.$level;
             $qr = "INSERT INTO Users VALUES(null,'$username','$password','$level','$fullname','$email')";
             $result = false;
             if(mysqli_query($this->connect,$qr)){

@@ -1,3 +1,13 @@
+<?php if(isset($data["result"])){?>
+    <h3> 
+    <?php
+        if($data["result"]=="true"){
+            $xoa = "../";
+        }
+        else {$xoa = "../";}
+    ?>
+    </h3>
+<?php }else{$xoa="";}?>
 <div class="content">
             <div class="trangchu">
                 <p>Tiêu đề</p>
@@ -11,16 +21,28 @@
                         <td class="td">Sửa</td>
                         <td class="td">Xóa</td>
                     </tr>
-                    <tr><td class='tdcon'>$row[username]</td>
-                        <td class='tdcon'><a href="edittieude.html">Sửa</a></td>
-                        <td class='tdcon'><a href="deletetieude.html">Xóa</a></td>
-                    </tr>
-                        </tbody>
-                        </table>
+                    <?php
+                        $array = $data["ds"];
+                        $num = count($array);
+                        for($row = 0; $row < $num; $row++){
+                            echo"<tr><td class='tdcon'>".$array[$row]."</td>
+                            <td class='tdcon'><form action='edittieude/".$array[$row]."' method = 'post'>
+                            <input type = 'submit' value = 'sửa'>
+                            </form>
+                            </td>
+                            <td class='tdcon'><form action='$xoa./xoatieude/".$array[$row]."' method = 'post'>
+                            <button class='add' type='submit' onClick='return confirm('Bạn chắc chắn muốn xoá tiêu đề này?');>xóa</button>
+                            </form>
+                            </tr>";
+                        }
+?>          
+                        </tbody></table>
                 </div>
                 </div>
-                <form action="addtieude.php" class="form_add">
+                <form action="<?php echo $xoa;?>addtieude" class="form_add" method="post">
                     <button class="add">Thêm</button>
                 </form>
             </div>
         </div>
+
+   

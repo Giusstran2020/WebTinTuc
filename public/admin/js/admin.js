@@ -20,13 +20,14 @@ function toggle_visibility(id,icon) {
     }
 }
 function kiemtradangnhap(){
-    var inputten = document.forms["form_noidung"]["tieude"];
+    var inputten = document.forms["form_add_title"]["txt"];
     var giatri = inputten.value;
     var theP = document.getElementById("thongbao");
     if(giatri == ""){
-        theP.style.display = "block";
-        theP.innerHTML = "Nhâp vào tiêu đề cần thêm nội dung";
-        theP.style.color = "red";
+        theP.style.display      = "block";
+        theP.style.marginTop    = "1%"
+        theP.innerHTML          = "Nhâp vào tiêu đề cần thêm nội dung";
+        theP.style.color        = "red";
         return false;
     }
     else{

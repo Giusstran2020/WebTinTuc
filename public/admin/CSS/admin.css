@@ -258,11 +258,11 @@ button{
     background-color: #0069c0;
     cursor: copy;
 }
-.form_add_title{
+form{
     margin-top: 2%;
     margin-left: 3%;
 }
-.txt_title{
+.txt{
     width: 98%;
     font-size: 20px;
     padding: 5px;

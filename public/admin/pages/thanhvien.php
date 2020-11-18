@@ -34,7 +34,7 @@
                         ?>
                     </tbody></table>
                 </div>
-                <form action="http://localhost:8080/lab-03/admin/addThanhvien" class="form_add">
+                <form action="http://localhost:8080/lab-03/admin/addThanhvien" class="form_add" method="post">
                     <button class="add">Thêm</button>
                 </form>
             </div>

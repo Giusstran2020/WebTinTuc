@@ -10,7 +10,7 @@
 <body>
     <div class="menu-left">
         <div class="menu-top">
-            <a href="#" class="brand-link">
+            <a href="http://localhost:8080/lab-03/admin" class="brand-link">
                 <img src="http://localhost:8080/lab-03/public/admin/images/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
                 <span class="brand-text font-weight-light">Admin</span>
             </a>
@@ -23,7 +23,7 @@
                     <div class="mp-level" id="tieude">
                         <ul>
                             <li><a href="http://localhost:8080/lab-03/admin/tieude">Liệt kê tiêu đề</a></li>
-                            <li><a href="addtieude.html">Thêm tiêu đề</a></li>
+                            <li><a href="http://localhost:8080/lab-03/admin/addtieude">Thêm tiêu đề</a></li>
                             <li><a href="#">Xoá tiêu đề</a></li>
                             <li><a href="edittieude.html">Sửa tiêu đề</a></li>
                         </ul>
