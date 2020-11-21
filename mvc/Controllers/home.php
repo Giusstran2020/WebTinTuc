@@ -10,9 +10,11 @@
         }
         function SayHi(){
             $ds = $this->tieudeModel->dstieude();
+            $tintuc = $this->tieudeModel->dsTintuc();
             $this->view("home", [
-                "pages"     => "home",
-                "ds"  => $ds,
+                "pages"    => "home",
+                "ds"       => $ds,
+                "tintuc"       => $tintuc,
                 
             ]);
         }

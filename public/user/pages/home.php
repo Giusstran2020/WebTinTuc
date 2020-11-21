@@ -45,57 +45,28 @@
         <div class="container">
             <div class="tinnoibat">
                 <div class = "colum-2-news width_3">
-                    <div class="text">
-                        <div class="left width_4">
-                           <div class="img-news">
-                                 amhr
+                   <?php
+                        $array = $data["tintuc"];
+                        $num = count($array);
+                        $num2 = ($num >= 3) ? 3 : $num; 
+                        for($row = 0; $row < $num2; $row++){
+                            echo '
+                            <div class="text">
+                            <div class="left width_4">
+                               <div class="img-news">
+                                     <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
+                                     <!-- nay de source url hinh anh tren DB ve-->
+                                </div>
+                            </div>
+                            <div class="right width_6">
+                                <div class="text-title">
+                                    '.$array[$row][0].'
+                                </div>
                             </div>
                         </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                              <!-- để tiêu đề -->
-                              <?php 
-                                $array = $data["ds"];
-                             
-                                    echo $array[0];
-                                
-                              ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text">
-                        <div class="left width_4">
-                           <div class="img-news">
-                                 amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                            <?php 
-                                $array = $data["ds"];
-                             
-                                    echo $array[1];
-                                
-                              ?>
-                            </div>
-                        </div>
-                    </div><div class="text">
-                        <div class="left width_4">
-                           <div class="img-news">
-                                 amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                            <?php 
-                                $array = $data["ds"];
-                               
-                                     echo $array[2];
-                                
-                              ?>
-                            </div>
-                        </div>
-                    </div>
+                            ';
+                        }
+                   ?>
                 </div>
                 <div class = "big-news width_5">
                     <div class="container">
@@ -138,96 +109,44 @@
         <div class="tintuc">
             <div class="container">
             <div class = "colum-2-news width_7">
-                    <div class="text">
-                    <div class="left width_4">
-                        <div class="img-news-2">
-                                amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                                title
-                            </div>
-                        </div>
-                    </div>
+           
+            <?php
+                        $array = $data["tintuc"];
+                        $num = count($array);
+                        $num2 = ($num >= 3) ? 3 : $num; 
+                        for($row = 0; $row < $num2; $row++){
+                            echo ' 
+                            <a href="#">
+                                <div class="text">
+                                <div class="left width_4">
+                                    <div class="img-news-2">
+                                        <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
+                                        <!-- nay de source url hinh anh tren DB ve-->
+                                    </div>
+                                </div>
+                                    <div class="right width_6">
+                                        <div class="text-title">
+                                        '.$array[$row][0].'
+                                        </div>
+                                        <div class="text-content">
+                                        '.$array[$row][1].'
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            ';
+                        }
+            ?>
                     <!--2-->
-                    <div class="text">
-                        <div class="left width_4">
-                        <div class="img-news-2">
-                                amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                                title
-                            </div>
-                        </div>
-                    </div>
+                    
                      <!--3-->
-                     <div class="text">
-                        <div class="left width_4">
-                        <div class="img-news-2">
-                                amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                                title
-                            </div>
-                        </div>
-                    </div>
+                     
                      <!--4-->
-                     <div class="text">
-                        <div class="left width_4">
-                        <div class="img-news-2">
-                                amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                                title
-                            </div>
-                        </div>
-                    </div>
+                     
                      <!--5-->
-                     <div class="text">
-                        <div class="left width_4">
-                        <div class="img-news-2">
-                                amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                                title
-                            </div>
-                        </div>
-                    </div>
+                    
                      <!--6-->
-                     <div class="text">
-                        <div class="left width_4">
-                        <div class="img-news-2">
-                                amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                                title
-                            </div>
-                        </div>
-                    </div>
                      <!--7-->
-                     <div class="text">
-                        <div class="left width_4">
-                        <div class="img-news-2">
-                                amhr
-                            </div>
-                        </div>
-                        <div class="right width_6">
-                            <div class="text-title">
-                                title
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class = "width_3">
