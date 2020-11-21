@@ -42,5 +42,59 @@
             }
             return json_encode($result);
          }
+         public function edit_tieude($TieuDe,$_TieuDe){
+            $qr = "UPDATE TinTuc SET TieuDe = '$_TieuDe' WHERE  TinTuc . TieuDe='$TieuDe'";
+            $result = false;
+            if(mysqli_query($this->connect,$qr)){
+                $result = true;
+            }
+            return json_encode($result);
+         }
+         //Phần nội dung
+         public function dsTintuc(){
+            // lấy hết ds trong tin tuc và trả về 1 mảng
+            $query = "select * from TinTuc";
+            $result = mysqli_query($this->connect,$query) or die(mysqli_error());
+            if(mysqli_num_rows($result)>0)
+	        {
+                $i = 0;
+                while ($row = mysqli_fetch_array($result))
+                { 
+                     $kq[$i] = array(
+                        $row["TieuDe"],
+                        $row["NoiDung"],
+                        $row["UrlHinh"],
+                    );
+                    $i = $i + 1;
+                }
+                return $kq;      
+            }
+        }
+        public function get_noidung($TieuDe){
+            $qr = "SELECT * FROM TinTuc WHERE TinTuc . TieuDe='$TieuDe'";
+            $result = mysqli_query($this->connect,$qr) or die(mysqli_error());
+            if(mysqli_num_rows($result)>0)
+	        {
+                $i = 0;
+                while ($row = mysqli_fetch_array($result))
+                { 
+                     $kq[$i] = array(
+                        $row["TieuDe"],
+                        $row["NoiDung"],
+                        $row["UrlHinh"],
+                    );
+                    $i = $i + 1;
+                }
+                return $kq;      
+            }
+         }
+        public function edit_noidung($TieuDe,$_noidung,$_hinhanh){
+            $qr = "UPDATE TinTuc SET NoiDung = '$_noidung' , UrlHinh = '$_hinhanh' WHERE  TinTuc . TieuDe='$TieuDe'";
+            $result = false;
+            if(mysqli_query($this->connect,$qr)){
+                $result = true;
+            }
+            return json_encode($result);
+         }
 }
 ?>

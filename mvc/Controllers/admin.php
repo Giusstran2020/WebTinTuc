@@ -57,37 +57,90 @@
                 "result"    => $kq
             ]);
         }
+        function edittieude($tieude){
+            if(isset($_POST["btn_edittieude"])){
+                
+                    $this->view("admin",[
+                        "pages" => "edittieude",
+                        "name"    => $tieude,
+                    ]);
+            }
+            else{
+                if(isset($_POST["submit_edittieude"])){
+                    $_tieude = $_POST["txt"];
+                    $check_tieude = $this->tieudeModel->check_tieude($_tieude);
+                    if($check_tieude == "false"){
+                        $kq = $this->tieudeModel->edit_tieude($tieude,$_tieude);
+                        $this->view("admin",[
+                            "pages"  => "edittieude",
+                            "result" => $kq,
+                            "name"   => $_tieude
+                        ]);  
+                    }
+                    else{
+                        $ds = $this->tieudeModel->dstieude();
+                        $this->view("admin",[
+                            "pages" => "edittieude",
+                            "result" => "false",
+                            "name"   => $tieude
+                        ]);
+                    }
+                }
+                else{
+                    $ds = $this->tieudeModel->dstieude();
+                    $this->view("admin",[
+                        "pages" => "tieude",
+                        "ds"    => $ds,
+                    ]);
+            }}
+            
+        }
         //Hết phần tiêu đề 
 
         // Phần nội dung
         function noidung(){
-        
+            $ds = $this->tieudeModel->dsTintuc();
             $this->view("admin",[
-                "pages" => "noidung"
+                "pages" => "noidung",
+                "ds"    => $ds,
             ]);
         }
-        function addnoidung(){
-            if(isset($_POST["btn_addtieude"])){
-                $nd = $_POST["txt"];
-                $check_tieude = $this->tieudeModel->check_tieude($tieude);
-                if($check_tieude == "false"){
-                    $kq = $this->tieudeModel->Insert_noidung($nd);
-                    $this->view("admin",[
-                        "pages"  => "addnoidung",
-                        "result" => $kq,
-                    ]);  
-                }
-                else{
-                    $this->view("admin",[
-                        "pages" => "addnoidung",
-                        "result" => "false"
-                    ]);
-                }
+        function xoanoidung($tieude){
+            $kq = $this->tieudeModel->delete_tieude($tieude);
+            $ds = $this->tieudeModel->dsTintuc();
+            $this->view("admin",[
+                "pages" => "noidung",
+                "ds"    => $ds,
+                "result"    => $kq
+            ]);
+        }
+        function editnoidung($tieude){
+            if(isset($_POST["btn_editnoidung"])){
+                $ds = $this->tieudeModel->get_noidung($tieude);
+                $this->view("admin",[
+                    "pages" => "editnoidung",
+                    "ds"    => $ds,
+                ]);
             }
             else{
-                $this->view("admin",[
-                    "pages" => "addnoidung"
-                ]);
+                if(isset($_POST["btn_submit"])){
+                    $_noidung = $_POST["text"];
+                    $_hinhanh = $_POST["hinhanh"];
+                    $kq = $this->tieudeModel->edit_noidung($tieude,$_noidung,$_hinhanh);
+                    $ds = $this->tieudeModel->get_noidung($tieude);
+                    $this->view("admin",[
+                        "pages" => "editnoidung",
+                        "result"    => $kq,
+                        "ds"    => $ds,
+                    ]);
+                }
+                else{
+                    $ds = $this->tieudeModel->dsTintuc();
+                    $this->view("admin",[
+                        "pages" => "noidung",
+                        "ds"    => $ds,
+                    ]);
+                }
             }
         }
         // Hết phần nội dung

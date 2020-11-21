@@ -1,13 +1,14 @@
 <?php if(isset($data["result"])){?>
     <h3> 
     <?php
+        $edit = "../";
         if($data["result"]=="true"){
             $xoa = "../";
         }
         else {$xoa = "../";}
     ?>
     </h3>
-<?php }else{$xoa="";}?>
+<?php }else{$xoa=""; $edit = "";}?>
 <div class="content">
             <div class="trangchu">
                 <p>Tiêu đề</p>
@@ -26,16 +27,16 @@
                         $num = count($array);
                         for($row = 0; $row < $num; $row++){
                             echo"<tr><td class='tdcon'>".$array[$row]."</td>
-                            <td class='tdcon'><form action='edittieude/".$array[$row]."' method = 'post'>
-                            <input type = 'submit' value = 'sửa'>
+                            <td class='tdcon'><form action='$edit./edittieude/".$array[$row]."' method = 'post'>
+                            <button class='add' name='btn_edittieude' type = 'submit'>sửa</button>
                             </form>
                             </td>
                             <td class='tdcon'><form action='$xoa./xoatieude/".$array[$row]."' method = 'post'>
-                            <button class='add' type='submit' onClick='return confirm('Bạn chắc chắn muốn xoá tiêu đề này?');>xóa</button>
+                            <button class='add' type='submit' onClick='return confirm(Bạn chắc chắn muốn xoá tiêu đề này?');'>xóa</button>
                             </form>
                             </tr>";
                         }
-?>          
+                    ?>          
                         </tbody></table>
                 </div>
                 </div>

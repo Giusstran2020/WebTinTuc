@@ -53,7 +53,13 @@
                         </div>
                         <div class="right width_6">
                             <div class="text-title">
-                                title
+                              <!-- để tiêu đề -->
+                              <?php 
+                                $array = $data["ds"];
+                             
+                                    echo $array[0];
+                                
+                              ?>
                             </div>
                         </div>
                     </div>
@@ -65,7 +71,12 @@
                         </div>
                         <div class="right width_6">
                             <div class="text-title">
-                                title
+                            <?php 
+                                $array = $data["ds"];
+                             
+                                    echo $array[1];
+                                
+                              ?>
                             </div>
                         </div>
                     </div><div class="text">
@@ -76,7 +87,12 @@
                         </div>
                         <div class="right width_6">
                             <div class="text-title">
-                                title
+                            <?php 
+                                $array = $data["ds"];
+                               
+                                     echo $array[2];
+                                
+                              ?>
                             </div>
                         </div>
                     </div>
@@ -87,7 +103,14 @@
                             ảnh bự chà bá
                         </div>
                         <div class="tin giới thiệu">
-                            <h1>Strong</h1>
+                            <h1>
+                                <?php 
+                                    $array = $data["ds"];
+                                
+                                        echo $array[0];
+                                    
+                                ?>
+                            </h1>
                             dòng giới thiệu
                         </div>
                     </div>
