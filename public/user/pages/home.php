@@ -27,7 +27,7 @@
                     </ul>
                 </div>
                 <div class="search">
-                    <form action="search.php" method="post">
+                    <form action="" method="post">
                         <div class="container-search">
                             <input class="txt-search"type="text" placeholder="search"></input>
                             <input class="btn-search" type="submit" value></input>
@@ -51,6 +51,7 @@
                         $num2 = ($num >= 3) ? 3 : $num; 
                         for($row = 0; $row < $num2; $row++){
                             echo '
+                            <a class="link" href="#">
                             <div class="text">
                             <div class="left width_4">
                                <div class="img-news">
@@ -64,43 +65,58 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                             ';
                         }
                    ?>
                 </div>
                 <div class = "big-news width_5">
                     <div class="container">
-                        <div class="img-big">
-                            ảnh bự chà bá
-                        </div>
-                        <div class="tin giới thiệu">
-                            <h1>
-                                <?php 
-                                    $array = $data["ds"];
-                                
-                                        echo $array[0];
-                                    
+                        <a href="#" class="link">
+                            <div class="img-big">
+                                <?php
+                                    echo '
+                                            <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
+                                    ';
                                 ?>
-                            </h1>
-                            dòng giới thiệu
-                        </div>
+                            </div>
+                            <div class="tin giới thiệu">
+                                
+                                    <?php 
+                                        $array = $data["tintuc"];
+                                    
+                                            echo '<h1>'.$array[0][0].'</h1>'.'
+                                            <p>'.$array[0][1].' </p>
+                                            ';
+                                        
+                                    ?>
+                            </div>
+                        </a>
+
                     </div>
                 </div>
                 <div class = "colum-1-news width_2">
-                    <div class="img-medium">
-                        ảnh bự vừa
-                    </div>
-                    <div class="introduce">
-                        <h4>Strong</h4>
-                        dòng giới thiệu
-                    </div>
-                    <div class="img-medium">
-                        ảnh bự vừa
-                    </div>
-                    <div class="introduce">
-                        <h4>Strong</h4>
-                        dòng giới thiệu
-                    </div>
+                   
+                        <?php
+                                $array = $data["tintuc"];
+                                $num = count($array);
+                                $num2 = ($num >= 2) ? 2 : $num; 
+                                for($row = 0; $row < $num2; $row++){
+                                echo '
+                                <a href="#" class="link">
+                                        
+                                            <div class="img-medium">
+                                            <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
+                                            </div>
+                                            <div class="introduce">
+                                                <h4>'.$array[$row][0].'</h4>
+                                                <p>'.$array[$row][1].'</p>
+                                            </div>  
+
+                                    </a>    
+                                ';}
+                        ?>
+                    
                 </div>
             </div>
         </div>
@@ -116,7 +132,7 @@
                         $num2 = ($num >= 3) ? 3 : $num; 
                         for($row = 0; $row < $num2; $row++){
                             echo ' 
-                            <a href="#">
+                            <a class="link" href="#">
                                 <div class="text">
                                 <div class="left width_4">
                                     <div class="img-news-2">
