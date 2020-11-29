@@ -9,12 +9,13 @@
             $this->tieudeModel = $this->model("tieudeModel");
         }
         function SayHi(){
-            $ds = $this->tieudeModel->dstieude();
-            $tintuc = $this->tieudeModel->dsTintuc();
+            //$ds = $this->tieudeModel->dstieude();
+            //$tintuc = $this->tieudeModel->dsTintuc();
+            //$user = $this->userModel->getUsers();
             $this->view("home", [
                 "pages"    => "home",
-                "ds"       => $ds,
-                "tintuc"       => $tintuc,
+                "ds"       => $user,
+                //"tintuc"       => $tintuc,
                 
             ]);
         }

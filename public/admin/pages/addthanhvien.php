@@ -26,7 +26,7 @@
         if($data["result"]=="true"){
             echo "Thêm thành công";
         }
-        else {echo "Thêm thất bại";}
+        else {echo "Thêm thất bại user đã tồn tại";}
     ?>
     </h3>
 <?php }?>

@@ -7,7 +7,12 @@
         }
 
         public function view($view,$data=[]){
-            require_once "./mvc/Views/".$view.".php";
+            if(file_exists("./mvc/Views/".$view.".php")) {
+                require_once "./mvc/Views/".$view.".php";
+            }else{
+                die("View does not exist.");
+            }
+            
         }
 
         function getBaseUrl(){

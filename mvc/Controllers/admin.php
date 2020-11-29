@@ -124,7 +124,7 @@
             }
             else{
                 if(isset($_POST["btn_submit"])){
-                    $_noidung = $_POST["text"];
+                    $_noidung = isset($_POST["content"]) ?  htmlspecialchars($_POST["content"]) : '';
                     $_hinhanh = $_POST["hinhanh"];
                     $kq = $this->tieudeModel->edit_noidung($tieude,$_noidung,$_hinhanh);
                     $ds = $this->tieudeModel->get_noidung($tieude);
@@ -145,18 +145,45 @@
         }
         // Hết phần nội dung
 
-        //Phâng thành viên 
+        //Phâng thành viên -------------------------------- PDO
         function thanhvien(){
-            $ds = $this->userModel->dsUser();
+            $listUsers = $this->userModel->getUsers();
             $this->view("admin",[
                 "pages" => "thanhvien",
-                "ds" => $ds
+                "listUsers" => $listUsers
             ]);
         }
-        function editthanhvien(){
+        function deleteUser($username){
+            $kq = $this->userModel->deleteUser($username);
+            $listUsers = $this->userModel->getUsers();
+            $this->view("admin",[
+                "pages" => "thanhvien",
+                "listUsers" => $listUsers,
+                "result"    => $kq
+            ]);
+        }
+        function editthanhvien($username){
+            $result = $this->userModel->GetInfoUser($username);
+            if(isset($_POST["btnEdit"]) ){
+                $fullname = $_POST["hovaten"];
+                $password = $_POST["password"];
+                $level = $_POST["level"];
+                $email = $_POST["email"];
+
+                $kq = $this->userModel->updatetUser($fullname,$username,$password,$email,$level);
+                $listUsers = $this->userModel->getUsers();
+                $this->view("admin",[
+                    "pages"  => "thanhvien",
+                    "listUsers" => $listUsers,
+                    "result" => $kq,
+                ]);
+            }
+        else{
             $this->view("admin",[
                 "pages" => "editthanhvien",
+                "infoUsser" => $result,
             ]);
+        }
         }
         function addthanhvien(){
             if(isset($_POST["btnadd"]) ){
@@ -167,9 +194,11 @@
                     $email = $_POST["email"];
                     $check_user = $this->userModel->check_user($username);
                     if($check_user == "false"){
-                        $kq = $this->userModel->Insert_user($fullname,$username,$password,$email,$level);
+                        $kq = $this->userModel->insertUser($fullname,$username,$password,$email,$level);
+                        $listUsers = $this->userModel->getUsers();
                         $this->view("admin",[
-                            "pages"  => "addthanhvien",
+                            "pages"  => "thanhvien",
+                            "listUsers" => $listUsers,
                             "result" => $kq,
                         ]);
                     }
@@ -187,6 +216,54 @@
                 ]);
             }
         }
+        //IMAGES
+        function avatarthanhvien(){
+            if(isset($_POST['ok'])) 
+
+            { 
+
+                $folder ="uploads/"; 
+
+                $image = $_FILES['image']['name']; 
+
+                $path = $folder . $image ; 
+
+                $target_file=$folder.basename($_FILES["image"]["name"]);
+
+
+                $imageFileType=pathinfo($target_file,PATHINFO_EXTENSION);
+
+
+                $allowed=array('jpeg','png' ,'jpg'); $filename=$_FILES['image']['name']; 
+
+                $ext=pathinfo($filename, PATHINFO_EXTENSION); if(!in_array($ext,$allowed) ) 
+
+                { 
+
+                    echo "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
+
+                }
+
+                else{ 
+
+                    move_uploaded_file( $_FILES['image'] ['tmp_name'], $path); 
+
+                    $sth=$con->prepare("insert into users(image)values(:image) "); 
+
+                    $sth->bindParam(':image',$image); 
+
+                    $sth->execute(); 
+
+                } 
+
+                } 
+                else{
+                    $this->view("admin",[
+                        "pages" => "avatarthanhvien",
+                        
+                    ]);
+                }
+        }
         //Hết phần thành viên
 
         //Phâng quảng cáo 
@@ -196,4 +273,3 @@
             ]);
         }
     }
-?>

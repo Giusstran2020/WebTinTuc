@@ -1,6 +1,12 @@
 <?php 
-    class tieudeModel extends DB{
-        public function dstieude(){
+    class tieudeModel {
+        private $db;
+
+        public function __contruct() {
+            $this->db = new DB;
+        }
+        
+     /*   public function dstieude(){
             // lấy hết ds tieu de và trả về 1 mảng
             $query = "select TieuDe from TinTuc";
             $result = mysqli_query($this->connect,$query) or die(mysqli_error());
@@ -89,12 +95,14 @@
             }
          }
         public function edit_noidung($TieuDe,$_noidung,$_hinhanh){
-            $qr = "UPDATE TinTuc SET NoiDung = '$_noidung' , UrlHinh = '$_hinhanh' WHERE  TinTuc . TieuDe='$TieuDe'";
+            // dễ gây lỗi ịnjection nên đổi kiểu sang kiểu PDO tối t3 xong
+            $qr = "UPDATE TinTuc SET NoiDung = '$_noidung' , UrlHinh = '$_hinhanh' WHERE TieuDe = '$TieuDe'";
             $result = false;
             if(mysqli_query($this->connect,$qr)){
                 $result = true;
             }
             return json_encode($result);
          }
+         */
 }
 ?>

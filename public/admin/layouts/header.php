@@ -1,17 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/4888640421.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="http://localhost:8080/lab-03/public/admin/CSS/admin.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/admin/CSS/admin.css">
     <title>Admin</title>
 </head>
 <body>
     <div class="menu-left">
         <div class="menu-top">
-            <a href="http://localhost:8080/lab-03/admin" class="brand-link">
-                <img src="http://localhost:8080/lab-03/public/admin/images/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+            <a href="<?php echo URLROOT; ?>/admin" class="brand-link">
+                <img src="<?php echo URLROOT; ?>/public/admin/images/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
                 <span class="brand-text font-weight-light">Admin</span>
             </a>
         </div>
@@ -22,8 +23,8 @@
                     <div class="box"><a class="icon-phone" href="#"><span><i class="far fa-folder-open"></i></span>    Tiêu đề</a></div>
                     <div class="mp-level" id="tieude">
                         <ul>
-                            <li><a href="http://localhost:8080/lab-03/admin/tieude">Liệt kê tiêu đề</a></li>
-                            <li><a href="http://localhost:8080/lab-03/admin/addtieude">Thêm tiêu đề</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/lab-03/admin/tieude">Liệt kê tiêu đề</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/lab-03/admin/addtieude">Thêm tiêu đề</a></li>
                             <li><a href="#">Xoá tiêu đề</a></li>
                             <li><a href="edittieude.html">Sửa tiêu đề</a></li>
                         </ul>
@@ -33,10 +34,10 @@
                     <div class="box"><a class="icon-tv" href="#" ><span><i class="fas fa-address-card"></i></span> Thành viên</a></div>
                     <div class="mp-level" id="thanhvien">
                         <ul>
-                            <li><a href="http://localhost:8080/lab-03/admin/thanhvien">Liệt kê Thành viên</a></li>
-                            <li><a href="addThanhvien.html">Thêm Thành viên</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/thanhvien">Liệt kê Thành viên</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/addthanhvien">Thêm Thành viên</a></li>
                             <li><a href="#">Xoá Thành viên</a></li>
-                            <li><a href="editThanhvien.html">Sửa thông tin Thành viên</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/avatarthanhvien">Ảnh đại diện Thành viên</a></li>
                         </ul>
                     </div>
                 </li>
@@ -44,7 +45,7 @@
                     <div class="box"><a class="icon-camera" href="#" ><span><i class="fas fa-ad"></i></span>   Quảng cáo</a></div>
                     <div class="mp-level" id="quangcao">
                         <ul>
-                            <li><a href="http://localhost:8080/lab-03/admin/quangcao">Liệt kê Quảng cáo</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/quangcao">Liệt kê Quảng cáo</a></li>
                             <li><a href="#">Thêm Quảng cáo</a></li>
                             <li><a href="#">Xoá Quảng cáo</a></li>
                             <li><a href="#">Sửa Quảng cáo</a></li>
@@ -55,7 +56,7 @@
                     <div class="box"><a class="icon-camera" href="#" ><span><i class="fas fa-book-open"></i></span>  Nội dung</a></div>
                     <div class="mp-level" id="noidung">
                         <ul>
-                            <li><a href="http://localhost:8080/lab-03/admin/noidung">Liệt kê Nội dung</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/noidung">Liệt kê Nội dung</a></li>
                             <li><a href="noidung.html">Thêm Nội dung</a></li>
                             <li><a href="noidung.html">Xoá Nội dung</a></li>
                             <li><a href="#">Sửa Nội dung</a></li>
