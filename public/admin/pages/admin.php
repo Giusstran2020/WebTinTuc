@@ -8,13 +8,13 @@
                         <div class="box_x">
                             <div class="inner bg_info ">
                                 <h3>150</h3>
-                                <h4>TIÊU ĐỀ</h4>
+                                <h4>THỂ LOẠI</h4>
                             </div>
                             <div class="icon-content">
                                 <i class="far fa-folder-open"></i>
                             </div>
                         </div>
-                                <a href="<?php echo URLROOT; ?>/admin/tieude" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="<?php echo URLROOT; ?>/admin/theloai" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                     <div class="detail_title bg_info green hover_tieude"> 
                         <div class="box_x">

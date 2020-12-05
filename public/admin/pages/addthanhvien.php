@@ -14,7 +14,17 @@
                         <lable for="email" class="input_left">Email:</lable>
                         <input name="email" type="text" class="input_right"></br>
                         <lable for="level" class="input_left">Level:</lable>
-                        <input  name="level" type="text" class="input_right"></br>
+                        <input name="level" type="text" class="input_right"></br>
+                        <lable for="birthday" class="input_left">Ngày sinh:</lable>
+                        <input name="birthday" type="text" class="input_right" placeholder="Y-m-d"></br>
+                        <lable for="permission" class="input_left">Phân Quyền: </lable>
+                        <input name="permission" type="text" class="input_right" placeholder="1-2-3-4"></br>
+                        <lable for="gender" class="input_left">Gender:</lable>
+                        <select name="gender" id="cars">
+                            <option value="Nam"><p>Nam</p></option>
+                            <option value="Nữ"><p>Nữ</p></option>
+                        </select>
+                        </br>
                         <button  class="add" name="btnadd">Thêm</button>       
                 </form>
             </div>
@@ -26,7 +36,7 @@
         if($data["result"]=="true"){
             echo "Thêm thành công";
         }
-        else {echo "Thêm thất bại user đã tồn tại";}
+        else {echo $data["error"];}
     ?>
     </h3>
 <?php }?>

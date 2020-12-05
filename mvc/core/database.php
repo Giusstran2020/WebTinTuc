@@ -71,8 +71,7 @@
 
         //Get's the row count
         public function rowCount(){
-            $this->execute();
-            return $this->statement->fetch(PDO::FETCH_OBJ);
+            return $this->statement->rowCount();
         }
         //
         public function fetchColumn(){

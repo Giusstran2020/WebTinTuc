@@ -7,45 +7,120 @@
             $this->db = new DB;
         }
         public function getUsers(){
-            $this->db->query("SELECT * FROM Users order by username asc");
+            $this->db->query("SELECT * FROM users order by Username asc");
 
             $result = $this->db->resultSet();
 
             return $result;
         }
+        // phan quyền 
+        public function getPrivileges($username){
+            $this->db->query("SELECT privileges FROM users WHERE Username =:username ");
+
+            //bind
+            $this->db->bind(':username',$username);
+
+            $result = $this->db->single();
+
+            return $result;
+        }
+        //lay id user 
+         // phan quyền 
+         public function getIDuser($username){
+            $this->db->query("SELECT IdUser FROM users WHERE Username =:username ");
+
+            //bind
+            $this->db->bind(':username',$username);
+
+            $result = $this->db->single();
+
+            return $result;
+        }
         //check_user
-        public function check_user($username){
+        public function check_user($IdUser){
             // kiem tra coi user tồn tại chưa
-            $this->db->query("SELECT username FROM Users WHERE username = '$username'");
+            $this->db->query("SELECT Username FROM users WHERE IdUser = :IdUser");
             
+            $this->db->bind(':IdUser',$IdUser);
+            
+            $data_exists = ($this->db->rowCount() > 0) ? "true" : "false";
+
+            return $data_exists;
+
+        }
+        // check admin user 
+        public function check_admin_user($username,$password){
+            // kiem tra coi user tồn tại chưa
+            $this->db->query("SELECT Username,Password,IdGroup FROM users WHERE Username = :username");
+
+            $this->db->bind(':username',$username);
+
             $result = $this->db->resultSet();
             
-            $data_exists = ($result == null) ? true : false;
+            $data_exists = ($this->db->rowCount() > 0) ? "true" : "false";
+            
+            if($data_exists == true){
+                foreach($result as $user){
+                    return ($user->Password == $password && $user->IdGroup == "1") ? true : false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        //Check email 
+        public function check_email($email){
+            // kiem tra coi user tồn tại chưa
+            $this->db->query("SELECT Username FROM users WHERE Email = :email");
+            
+            $this->db->bind(':email',$email);
+
+            $result = $this->db->resultSet();
+            
+            $data_exists = ($this->db->rowCount() > 0) ? "true" : "false";
 
             return $data_exists;
 
         }
         // Insert User
-        public function insertUser($fullname,$username,$password,$email,$level){
-            $this->db->query("INSERT INTO Users VALUES(null,'$username','$password','$level','$fullname','$email')");
+        public function insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission){
+            $this->db->query("INSERT INTO users VALUES(null,:fullname,:username,:password,:email,:RegisterDay,:level,:Birthday,:gender,:avatar,:privileges)");
          
+            // bind value
+            $this->db->bind(':fullname',$fullname);
+            $this->db->bind(':username',$username);
+            $this->db->bind(':password',$password);
+            $this->db->bind(':email',$email);
+            $this->db->bind(':level',$level);
+            $this->db->bind(':gender',$gender);
+            $this->db->bind(':avatar',$avatar);
+            $this->db->bind(':RegisterDay',$RegisterDay);
+            $this->db->bind(':Birthday',$Birthday);
+            $this->db->bind(':privileges',$permission);
+            //
             $result = $this->db->execute();
         
             return  $result;
  
          }
         // get info 1 user
-        public function GetInfoUser($username){
-            $this->db->query("SELECT * FROM Users WHERE username = '$username'");
+        public function GetInfoUser($IdUser){
+            $this->db->query("SELECT * FROM users WHERE IdUser = :IdUser");
             
+            //bind
+            $this->db->bind(':IdUser',$IdUser);
+
             $result = $this->db->resultSet();
 
             return $result;
         }
         //  delete info 1 user
-        public function deleteUser($username){
-            $this->db->query("DELETE FROM Users WHERE username='$username'");
+        public function deleteUser($IdUser){
+            $this->db->query("DELETE FROM users WHERE IdUser = :IdUser");
             
+            //bind
+            $this->db->bind(':IdUser',$IdUser);
+
             $result = $this->db->execute();
 
             if(isset($result)){
@@ -54,78 +129,24 @@
             return false;
          }
         // update info 1 user
-        public function updatetUser($fullname,$username,$password,$email,$level){
-            $this->db->query("UPDATE Users SET  password = '$password', level = '$level', hoten = '$fullname', email = '$email' WHERE Users . username = '$username'");
+        public function updatetUser($fullname,$IdUser,$password,$email,$level,$gender,$Birthday,$privileges){
+            $this->db->query("UPDATE users SET FullName = :fullname, Password = :password,Email = :email,IdGroup = :level, BirthDay = :Birthday, Gender = :gender, privileges = :privileges WHERE  users . IdUser = :IdUser");
          
+            
+            // bind value
+            $this->db->bind(':fullname',$fullname);
+            $this->db->bind(':IdUser',$IdUser);
+            $this->db->bind(':password',$password);
+            $this->db->bind(':email',$email);
+            $this->db->bind(':level',$level);
+            $this->db->bind(':gender',$gender);
+            $this->db->bind(':Birthday',$Birthday);
+            $this->db->bind(':privileges',$privileges);
+
             $result = $this->db->execute();
         
             return  $result;
         }
-        
-        
-        /*
-        public function Check_Login($username,$password){
-            $query = "SELECT username, password FROM admin WHERE username='$username'";
-            $result = mysqli_query($this->connect,$query) or die(mysqli_error());
-            $kq = false;
-            if (mysqli_num_rows($result) == 0){
-                $kq = false;
-                // ktra ten
-                echo "sai ten";
-            }
-            else {
-                $row = mysqli_fetch_array($result);
-                if ($password == $row['password']){
-                    $kq = true;   
-                }
-            }
-             return json_encode($kq);
-        }
-        public function Get_level(){
-            // kiem tra coi user là level gi để đưa vào quản trị tương ứng
-        }
-        public function dsUser(){
-            // lấy hết ds user và trả về 1 mảng
-            $query = "select * from Users order by username asc";
-            $result = mysqli_query($this->connect,$query) or die(mysqli_error());
-            if(mysqli_num_rows($result)>0)
-	        {
-                $i = 0;
-                while ($row = mysqli_fetch_array($result))
-                { 
-                    
-                    $kq[$i] = array(
-                        $row["username"],
-                        $row["hoten"],
-                        $row["email"],
-                        $row["level"],
-                    );
-                    $i = $i + 1;
-                }
-                
-                return $kq;      
-            }
-        }
-        public function check_user($username){
-            // kiem tra coi user tồn tại chưa
-            $query = "SELECT username FROM Users WHERE username='$username'";
-            $result = mysqli_query($this->connect,$query) or die(mysqli_error());
-            $kq = false;
-            if (mysqli_num_rows($result) > 0){
-                $kq = true;
-             }
-             return json_encode($kq);
-        }
-        public function Insert_user($fullname,$username,$password,$email,$level){
-            $qr = "INSERT INTO Users VALUES(null,'$username','$password','$level','$fullname','$email')";
-            $result = false;
-            if(mysqli_query($this->connect,$qr)){
-                $result = true;
-            }
-            return json_encode($result);
- 
-         }
-*/
         
 }
 ?>

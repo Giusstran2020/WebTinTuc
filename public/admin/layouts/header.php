@@ -20,13 +20,13 @@
            <div class="menu-bar">
             <ul>
                 <li class="icon icon-arrow-left" id="style-title" onclick="toggle_visibility('tieude','style-title');">
-                    <div class="box"><a class="icon-phone" href="#"><span><i class="far fa-folder-open"></i></span>    Tiêu đề</a></div>
+                    <div class="box"><a class="icon-phone" href="#"><span><i class="far fa-folder-open"></i></span> Thể Loại</a></div>
                     <div class="mp-level" id="tieude">
                         <ul>
-                            <li><a href="<?php echo URLROOT; ?>/lab-03/admin/tieude">Liệt kê tiêu đề</a></li>
-                            <li><a href="<?php echo URLROOT; ?>/lab-03/admin/addtieude">Thêm tiêu đề</a></li>
-                            <li><a href="#">Xoá tiêu đề</a></li>
-                            <li><a href="edittieude.html">Sửa tiêu đề</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/theloai">Liệt kê thể loại</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/addtheloai">Thêm thể loại</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/theloai">Xoá thể loại</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/theloai">Sửa tiêu đề</a></li>
                         </ul>
                     </div>
                 </li>
@@ -57,9 +57,7 @@
                     <div class="mp-level" id="noidung">
                         <ul>
                             <li><a href="<?php echo URLROOT; ?>/admin/noidung">Liệt kê Nội dung</a></li>
-                            <li><a href="noidung.html">Thêm Nội dung</a></li>
-                            <li><a href="noidung.html">Xoá Nội dung</a></li>
-                            <li><a href="#">Sửa Nội dung</a></li>
+                            <li><a href="<?php echo URLROOT; ?>/admin/noidungpic">Hình ảnh của nội dung</a></li>
                         </ul>
                     </div>
                 </li>
@@ -82,10 +80,10 @@
             </div>
             <div class="title_right">
                 <div class="thongbao-message">
-                    <form action="#" method="POST">
-                        <button value=""><i class="fab fa-facebook-messenger"></i></button>
-                        <button value=""><i class="far fa-bell"></i></button>
-                        <a  href="#">Logout</a>
+                        <a  href="#"><i class="fab fa-facebook-messenger"></i></a>
+                        <a  href="#"><i class="far fa-bell"></i></a>
+                    <form action="<?php echo URLROOT;?>/admin/logout" id="logout" method="POST">
+                        <button name="btnLogout" form="logout" type="submit">Logout</button>
                     </form>
                 </div>
             </div>
