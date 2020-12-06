@@ -22,6 +22,9 @@
     float: left;
     padding: 30px 20px 0px 20px;
 }
+.logo p{
+    font-weight: bold;
+}
 .menu{
     width: 70%;
     float: left;
@@ -34,6 +37,10 @@
 .login{
     width: 5%;
     float: left;
+}
+.login a:hover{
+    font-weight: 400;
+    font-size: 26px;
 }
 /*css cho thanh menu*/
 .search{
@@ -75,6 +82,9 @@
     position: absolute;
     top:2px;
     left: 150px;
+}
+.btn-search:hover{
+    background-color: rgb(179, 179, 179);
 }
 .txt-search{
    font-size: 16px;

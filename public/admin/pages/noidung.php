@@ -34,8 +34,8 @@
                         ?>
                     </tbody></table>
 
-                    <form name = "btn_addnoidung" action="<?php echo URLROOT; ?>/admin/addnoidung" class="form_add" method="post">
-                         <button class="add">Thêm</button>
+                    <form  action="<?php echo URLROOT; ?>/admin/addnoidung" class="form_add" method="post">
+                         <button name="btn_addnoidung" class="add">Thêm</button>
                 </form>
                 </div>
                 </div>

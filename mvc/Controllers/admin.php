@@ -89,7 +89,7 @@
                     "error" => "0",
                 ]);
             }
-    }
+        }
     // Kết thuc trang login
        
     //Phân the lọai
@@ -314,6 +314,7 @@
                             $IdNewsType = $list->IdNewsType;
                         }
                         $Title = isset($_POST["theloai"]) ?  htmlspecialchars($_POST["theloai"]) : '';
+                        $HotNews = isset($_POST["HotNews"]) ?  htmlspecialchars($_POST["HotNews"]) : '';
                         $_Overview = isset($_POST["tomtat"]) ?  htmlspecialchars($_POST["tomtat"]) : '';
                         $_Detail = isset($_POST["content"]) ?  htmlspecialchars($_POST["content"]) : '';
                         $_UrlPics = isset($_POST["hinhanh"]) ?  htmlspecialchars($_POST["hinhanh"]) : '';
@@ -327,7 +328,7 @@
                             $Day = getdate();
                             $_Day = date_format($Day,"Y/m/d");
                         }
-                        $kq = $this->noidungModel->update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType);
+                        $kq = $this->noidungModel->update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType,$HotNews);
                         $ds = $this->noidungModel->get_noidung($IdNews);
                         $this->view("admin",[
                             "pages" => "editnoidung",
@@ -371,6 +372,7 @@
                                 $IdNewsType = $list->IdNewsType;
                             }
                             $Title = isset($_POST["theloai"]) ?  htmlspecialchars($_POST["theloai"]) : '';
+                            $HotNews = isset($_POST["HotNews"]) ?  htmlspecialchars($_POST["HotNews"]) : '';
                             $_Overview = isset($_POST["tomtat"]) ?  htmlspecialchars($_POST["tomtat"]) : '';
                             $_Detail = isset($_POST["content"]) ?  htmlspecialchars($_POST["content"]) : '';
                             $_UrlPics = isset($_POST["hinhanh"]) ?  htmlspecialchars($_POST["hinhanh"]) : '';
@@ -384,7 +386,7 @@
                                 $Day = getdate();
                                 $_Day = date_format($Day,"Y/m/d");
                             }
-                            $kq = $this->noidungModel->update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType);
+                            $kq = $this->noidungModel->update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType,$HotNews);
                             $ds = $this->noidungModel->get_noidung($IdNews);
                             $this->view("admin",[
                                 "pages" => "editnoidung",
@@ -408,22 +410,55 @@
                 }      
             }
         }
+                            // đang làm
         function addnoidung(){
             if(isset($_SESSION['admin'])){
-                if(isset($_POST['btn_addnoidung'])){
                     $ds = $this->noidungModel->dsnoidung();
                         $this->view("admin",[
                             "pages" => "noidung",
                             "ds"    => $ds,
                             "error"    => "1",
                         ]);
-                }
-                else{
-
-                }
             }
             else{
-
+                if(isset($_SESSION['username'])){
+                    $IdUser =  $_SESSION['IdUser'];
+                    if(isset($_POST['btn_addnoidung'])){
+                        $this->view("admin",[
+                            "pages" => "addnoidung",
+                        ]);
+                    }
+                    else{
+                       if(isset($_POST['btn_submit'])){ 
+                            $Title = isset($_POST["theloai"]) ?  htmlspecialchars($_POST["theloai"]) : '';
+                            $HotNews = isset($_POST["HotNews"]) ?  htmlspecialchars($_POST["HotNews"]) : '';
+                            $_Overview = isset($_POST["tomtat"]) ?  htmlspecialchars($_POST["tomtat"]) : '';
+                            $_Detail = isset($_POST["content"]) ?  htmlspecialchars($_POST["content"]) : '';
+                            $_UrlPics = isset($_POST["hinhanh"]) ?  htmlspecialchars($_POST["hinhanh"]) : '';
+                            $_NewsAppear = isset($_POST["anhien"]) ?  htmlspecialchars($_POST["anhien"]) : '';
+                            $_Keyword = isset($_POST["Keyword"]) ?  htmlspecialchars($_POST["Keyword"]) : '';
+                            $_IdNewsType = isset($_POST["IdNewsType"]) ?  htmlspecialchars($_POST["IdNewsType"]) : '';
+                            $_Day = date("Y-m-d");
+                            $kq = $this->noidungModel->insert_noidung($Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdUser,$HotNews);
+                            $this->view("admin",[
+                                "pages" => "addnoidung",
+                                "result" => $kq
+                            ]);
+                        }
+                       else{
+                            if(isset($_POST['btn_addnoidung'])){
+                                $this->view("admin",[
+                                    "pages" => "addnoidung",
+                                ]);
+                            }
+                       }
+                    }
+                }
+                else{
+                    $this->view("admin",[
+                        "pages" => "login",
+                    ]);
+                }
             }
         }
         function noidungpic(){

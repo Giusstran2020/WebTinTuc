@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost:8080/lab-03/public/user/CSS/home.css" >
+    <link rel="stylesheet" href="<?php echo URLROOT;?>/public/user/CSS/home.css" >
     <title>News</title>
 </head>
 <body>
@@ -13,7 +13,17 @@
         </div>
         <div class="menubar">
             <div class="container">
-                <div class="logo"><a href="#">LOGO</a></div>
+            <?php
+                    if(isset($data["infoUser"])){
+                        foreach($data["infoUser"] as $user){
+                         echo "<div class= 'logo '><p>Chào ".$user->Username." </p></div>";
+                        }
+                    }
+                    else{
+                        echo "<div class= 'logo '><a href='".URLROOT."/home'>LOGO</a></div>";
+                    }
+            ?>
+                
                 <div class="menu">
                     <ul>
                         <li><a href="#">Xã hội</a></li>
@@ -29,13 +39,20 @@
                 <div class="search">
                     <form action="" method="post">
                         <div class="container-search">
-                            <input class="txt-search"type="text" placeholder="search"></input>
+                            <input class="txt-search"type="text" placeholder="Tìm kiếm"></input>
                             <input class="btn-search" type="submit" value></input>
                         </div>
                     </form>
                 </div>
                 <div class="login">
-                   <a href="#">login</a>
+                <?php
+                    if(isset($data["loged"])){
+                         echo "<a href='".URLROOT."/user/logout'>Đăng xuất</a>";
+                    }
+                    else{
+                        echo "<a href='".URLROOT."/user/login'>Đăng nhập</a>";
+                    }
+                ?>
                 </div>
                 </div>
             </div>
@@ -46,28 +63,44 @@
             <div class="tinnoibat">
                 <div class = "colum-2-news width_3">
                    <?php
-                        $array = $data["tintuc"];
-                        $num = count($array);
-                        $num2 = ($num >= 3) ? 3 : $num; 
-                        for($row = 0; $row < $num2; $row++){
-                            echo '
-                            <a class="link" href="#">
-                            <div class="text">
-                            <div class="left width_4">
-                               <div class="img-news">
-                                     <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
-                                     <!-- nay de source url hinh anh tren DB ve-->
+                    $viewd = 0;
+                    $i = 0;
+                       foreach($data["dsnoidung"] as $list){  
+                            if($list->HotNews == "1"){
+                                $i++;
+                                echo '
+                                <a class="link" href="'.URLROOT.'/home/'.$list->IdNews.'">
+                                <div class="text">
+                                <div class="left width_4">
+                                <div class="img-news">
+                                        <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
+                                        <!-- nay de source url hinh anh tren DB ve-->
+                                    </div>
+                                </div>
+                                <div class="right width_6">
+                                    <div class="text-title">
+                                        '.$list->Title.'
+                                    </div>
                                 </div>
                             </div>
-                            <div class="right width_6">
-                                <div class="text-title">
-                                    '.$array[$row][0].'
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                            ';
+                            </a>
+                                ';
+                            if(!isset($_SESSION['username_0'])){
+                                if(!isset($_SESSION['view'] ))
+                                    $_SESSION['view'] = array();
+                                else{
+                                    $_SESSION['view'][$viewd++] = $list->IdNews;
+                                }
+                            }
+                            else{
+
+                            }
                         }
+                        if($i == 3){
+                            break;
+                        }
+                    }
+                    
                    ?>
                 </div>
                 <div class = "big-news width_5">
@@ -82,13 +115,15 @@
                             </div>
                             <div class="tin giới thiệu">
                                 
-                                    <?php 
-                                        $array = $data["tintuc"];
-                                    
-                                            echo '<h1>'.$array[0][0].'</h1>'.'
-                                            <p>'.$array[0][1].' </p>
+                                    <?php
+                                    foreach($data["dsnoidung"] as $list){  
+                                        if($list->HotNews == "1"){
+                                            echo '<h1>'.$list->Title.'</h1>'.'
+                                            <p>'.$list->Overview.' </p>
                                             ';
-                                        
+                                        break;
+                                        }
+                                    }
                                     ?>
                             </div>
                         </a>
@@ -98,23 +133,27 @@
                 <div class = "colum-1-news width_2">
                    
                         <?php
-                                $array = $data["tintuc"];
-                                $num = count($array);
-                                $num2 = ($num >= 2) ? 2 : $num; 
-                                for($row = 0; $row < $num2; $row++){
-                                echo '
-                                <a href="#" class="link">
-                                        
-                                            <div class="img-medium">
-                                            <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
-                                            </div>
-                                            <div class="introduce">
-                                                <h4>'.$array[$row][0].'</h4>
-                                                <p>'.$array[$row][1].'</p>
-                                            </div>  
+                            $n = 0;
+                            foreach($data["dsnoidung"] as $list){  
+                                if($list->HotNews == "1"){
+                                    if($n >= $i && $n < $i + 2){
+                                        echo '
+                                        <a href="'.URLROOT.'/home/'.$list->IdNews.'" class="link">
+                                                
+                                                    <div class="img-medium">
+                                                    <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
+                                                    </div>
+                                                    <div class="introduce">
+                                                        <h4>'.$list->Title.'</h4>
+                                                        <p>'.$list->Overview.'</p>
+                                                    </div>  
 
-                                    </a>    
-                                ';}
+                                            </a>    
+                                        ';
+                                    }
+                                    $n++;
+                                }
+                            }
                         ?>
                     
                 </div>
@@ -127,12 +166,10 @@
             <div class = "colum-2-news width_7">
            
             <?php
-                        $array = $data["tintuc"];
-                        $num = count($array);
-                        $num2 = ($num >= 3) ? 3 : $num; 
-                        for($row = 0; $row < $num2; $row++){
+            foreach($data["dsnoidung"] as $list){  
+                if($list->HotNews == "0"){
                             echo ' 
-                            <a class="link" href="#">
+                            <a class="link" href="'.URLROOT.'/home/'.$list->IdNews.'">
                                 <div class="text">
                                 <div class="left width_4">
                                     <div class="img-news-2">
@@ -142,18 +179,32 @@
                                 </div>
                                     <div class="right width_6">
                                         <div class="text-title">
-                                        '.$array[$row][0].'
+                                        '.$list->Title.'
                                         </div>
                                         <div class="text-content">
-                                        '.$array[$row][1].'
+                                        '.$list->Overview.'
                                         </div>
                                     </div>
                                 </div>
                             </a>
-                            ';
+                            ';}
                         }
             ?>
-                    <!--2-->
+            <div>
+                <h1>
+                    Danh mục đã xem
+                </h1>
+                <?php
+                   if(!isset($_SESSION["viewed"])){
+                       echo "<h3> Chưa có mục nào </h3>";
+                   }
+                   else{
+                       foreach($_SESSION["viewed"] as $list){
+                            echo $list->IdNews;
+                       }
+                   }
+                ?>
+            </div>
                     
                      <!--3-->
                      

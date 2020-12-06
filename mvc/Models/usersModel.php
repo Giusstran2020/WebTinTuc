@@ -68,6 +68,26 @@
                 return false;
             }
         }
+        // check user 
+        public function check_user_0($username,$password){
+            // kiem tra coi user tồn tại chưa
+            $this->db->query("SELECT Username,Password,IdGroup FROM users WHERE Username = :username");
+
+            $this->db->bind(':username',$username);
+
+            $result = $this->db->resultSet();
+            
+            $data_exists = ($this->db->rowCount() > 0) ? "true" : "false";
+            
+            if($data_exists == true){
+                foreach($result as $user){
+                    return ($user->Password == $password && $user->IdGroup == "0") ? true : false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
         //Check email 
         public function check_email($email){
             // kiem tra coi user tồn tại chưa

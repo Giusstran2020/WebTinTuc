@@ -14,14 +14,14 @@
                     <textarea name="content" type="text" class="input_right" rows="6"></textarea></br>
                     <label for="hinhanh" class="input_left">Hình ảnh</label>
                     <input name="hinhanh" type="text" class="input_right" ></br>
-                    <label for="day" class="input_left">Ngày tạo: </label>
-                    <input name="day" type="text" class="input_right" ><br>
                     <label for="anhien" class="input_left">Ẩn hiện: </label>
                     <input name="anhien" type="text" class="input_right" ></br>
                     <label for="Keyword" class="input_left">Từ khóa: </label>
                     <input name="Keyword" type="text" class="input_right" ></br>
                     <label for="IdNewsType" class="input_left">Thể loại: </label>
                     <input name="IdNewsType" type="text" class="input_right" ></br>
+                    <label for="HotNews" class="input_left">Tin nổi bật: </label>
+                    <input name="HotNews" type="text" class="input_right" ></br>
 
                     <button class="add" name = "btn_submit">Thêm</button>
                 </form>

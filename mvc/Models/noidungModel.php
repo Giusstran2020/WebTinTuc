@@ -24,11 +24,11 @@
             return $result;
         }
         
-        public function Insert_noidung($IdNews, $Title, $Overview, $Detail, $UrlPics, $Day, $Views, $NewsAppear, $Keyword, $IdNewsType){
-            $this->db->query("INSERT INTO `news` (IdNews, Title, Overview, Detail, UrlPics, Day, Views, NewsAppear, Keyword, IdNewsType) VALUES (NULL,:IdNews, :Title, :Overview, :Detail, :UrlPics, :Day, :Views, :NewsAppear, :Keyword, :IdNewsType)");
+        public function Insert_noidung($Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$IdNewsType,$IdUser,$HotNews){
+            $this->db->query("INSERT INTO news (IdNews, IdUser ,Title, Overview, Detail, UrlPics, Day, Views, NewsAppear, Keyword, IdNewsType, HotNews) VALUES (NULL,:IdUser, :Title, :_Overview, :_Detail, :_UrlPics, :_Day, :Views, :_NewsAppear, :_Keyword, :IdNewsType, :HotNews)");
          
             //bind value
-            $this->db->bind(':IdNews',$IdNews);
+            $Views = 0;
             $this->db->bind(':_Overview',$_Overview);
             $this->db->bind(':_Detail',$_Detail);
             $this->db->bind(':_UrlPics',$_UrlPics);
@@ -37,8 +37,9 @@
             $this->db->bind(':_Day',$_Day);
             $this->db->bind(':Title',$Title);
             $this->db->bind(':IdNewsType',$IdNewsType);
-            $this->db->bind(':_IdNewsType',$_IdNewsType);
             $this->db->bind(':Views',$Views);
+            $this->db->bind(':IdUser',$IdUser);
+            $this->db->bind(':HotNews',$HotNews);
 
 
             $result = $this->db->execute();
@@ -68,9 +69,10 @@
             return $result;
         }
          // update info 1 the loai
-         public function update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType){
-            $this->db->query("UPDATE news SET Overview = :_Overview, Detail = :_Detail, UrlPics = :_UrlPics, NewsAppear = :_NewsAppear ,Day = :_Day, Keyword = :_Keyword , IdNewsType = :_IdNewsType, Title = :Title  WHERE  IdNews = :IdNews AND IdNewsType = :IdNewsType");
+         public function update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType,$HotNews){
+            $this->db->query("UPDATE news SET Overview = :_Overview, Detail = :_Detail, UrlPics = :_UrlPics, NewsAppear = :_NewsAppear ,Day = :_Day, Keyword = :_Keyword , IdNewsType = :_IdNewsType, Title = :Title, HotNews = :HotNews  WHERE  IdNews = :IdNews AND IdNewsType = :IdNewsType");
 
+            //bind 
             $this->db->bind(':IdNews',$IdNews);
             $this->db->bind(':_Overview',$_Overview);
             $this->db->bind(':_Detail',$_Detail);
@@ -81,6 +83,7 @@
             $this->db->bind(':_IdNewsType',$_IdNewsType);
             $this->db->bind(':IdNewsType',$IdNewsType);
             $this->db->bind(':Title',$Title);
+            $this->db->bind(':HotNews',$HotNews);
 
             $result = $this->db->execute();
         

@@ -37,7 +37,8 @@
                     <input name="Keyword" type="text" class="input_right" value="<?php echo $list->Keyword; ?>"></br>
                     <label for="IdNewsType" class="input_left">Thể loại: </label>
                     <input name="IdNewsType" type="text" class="input_right" value="<?php echo $list->IdNewsType; ?>"></br>
-
+                    <label for="HotNews" class="input_left">Tin nổi bật: </label>
+                    <input name="HotNews" type="text" class="input_right"value="<?php echo $list->HotNews; ?>" ></br>
                     <button class="add" name = "btn_submit">Sửa</button>
                 </form>
                 </div>
