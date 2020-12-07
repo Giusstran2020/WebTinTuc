@@ -46,7 +46,7 @@
                 </div>
                 <div class="login">
                 <?php
-                    if(isset($data["loged"])){
+                    if(isset($_SESSION['username_0'])){
                          echo "<a href='".URLROOT."/user/logout'>Đăng xuất</a>";
                     }
                     else{
@@ -69,7 +69,7 @@
                             if($list->HotNews == "1"){
                                 $i++;
                                 echo '
-                                <a class="link" href="'.URLROOT.'/home/'.$list->IdNews.'">
+                                <a class="link" href="'.URLROOT.'/home/viewed/'.$list->IdNews.'">
                                 <div class="text">
                                 <div class="left width_4">
                                 <div class="img-news">
@@ -138,7 +138,7 @@
                                 if($list->HotNews == "1"){
                                     if($n >= $i && $n < $i + 2){
                                         echo '
-                                        <a href="'.URLROOT.'/home/'.$list->IdNews.'" class="link">
+                                        <a href="'.URLROOT.'/home/viewed/'.$list->IdNews.'" class="link">
                                                 
                                                     <div class="img-medium">
                                                     <img src="http://localhost:8080/lab-03/public/user/images/image.JPG">
@@ -169,7 +169,7 @@
             foreach($data["dsnoidung"] as $list){  
                 if($list->HotNews == "0"){
                             echo ' 
-                            <a class="link" href="'.URLROOT.'/home/'.$list->IdNews.'">
+                            <a class="link" href="'.URLROOT.'/home/viewed/'.$list->IdNews.'">
                                 <div class="text">
                                 <div class="left width_4">
                                     <div class="img-news-2">
@@ -195,14 +195,21 @@
                     Danh mục đã xem
                 </h1>
                 <?php
-                   if(!isset($_SESSION["viewed"])){
+                   if(!isset($data['dsview'])){
                        echo "<h3> Chưa có mục nào </h3>";
                    }
                    else{
-                       foreach($_SESSION["viewed"] as $list){
-                            echo $list->IdNews;
+                       foreach($data['dsview'] as $dsview){
+                        foreach($dsview as $viewed)
+                           echo '
+                           <div class="text-title">
+                           '.$viewed->Title.'
+                           </div>
+                           <div class="text-content">
+                           '.$viewed->Overview.'
+                           </div>';
                        }
-                   }
+                    }
                 ?>
             </div>
                     
