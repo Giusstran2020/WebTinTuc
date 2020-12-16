@@ -4,6 +4,9 @@
         public $userModel;
         public $noidungModel;
         public $theloaiModel;
+        private $validate_number = "/^[0-9]]*$/";
+        private $validate_username = "/^[a-zA-Z0-9]]*$/";
+        private $validate_name = "/^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/";
         public function __construct(){
             //Model 
             $this->userModel = $this->model("usersModel");
@@ -121,23 +124,46 @@
         //Add the lọai
         function addtheloai(){
             if(isset($_SESSION['username']) || isset($_SESSION['admin'])){
-                if(isset($_POST["btn_addtheloai"])){    
-                    $theloai = $_POST['txt'];
+                if(isset($_POST["btn_addtheloai"])){   
+                    $theloai = $_POST['theloai'];
                     $STT = $_POST['txt_STT'];
                     $anhien = $_POST['txt_anhien'];
-                    $check_theloai = $this->theloaiModel->check_theloai($theloai);
-                    if($check_theloai == "false"){
-                        $kq = $this->theloaiModel->Insert_theloai($theloai,$STT,$anhien);
-                        $this->view("admin",[
-                            "pages"  => "addtheloai",
-                            "result" => $kq,
-                        ]);  
-                    }
-                    else{
+                    if($theloai == null || $STT = null || $anhien == null){
                         $this->view("admin",[
                             "pages" => "addtheloai",
-                            "result" => "false"
+                            "error" => "1",
                         ]);
+                    }
+                    else{   
+                        if(!preg_match($this->validate_name,$theloai)){
+                            $this->view("admin",[
+                                "pages" => "addtheloai",
+                                "error" => "2",
+                            ]);
+                        }
+                        else{
+                            if(!preg_match($this->validate_number,$STT)){     
+                                $this->view("admin",[
+                                    "pages" => "addtheloai",
+                                    "error" => "3",
+                                ]);
+                            }
+                            else{
+                                $check_theloai = $this->theloaiModel->check_theloai($theloai);
+                                if($check_theloai == "false"){
+                                    $kq = $this->theloaiModel->Insert_theloai($theloai,$STT,$anhien);
+                                    $this->view("admin",[
+                                        "pages"  => "addtheloai",  
+                                    ]);  
+                                }
+                                else{
+                                    $this->view("admin",[
+                                        "pages" => "addtheloai",
+                                        "result" => "false"
+                                    ]);
+                                }
+                            }
+                        }
                     }
                 }
                 else{
@@ -188,18 +214,47 @@
                 }
                 else{
                     if(isset($_POST["submit_edittheloai"])){
-                        $_theloai = $_POST["txt"];
+                        $_theloai = $_POST["theloai"];
                         $STT = $_POST["txt_STT"];
                         $anhien = $_POST["txt_anhien"];
-                        $kq = $this->theloaiModel->update_theloai($IdType,$_theloai,$STT,$anhien);
-                        $ds = $this->theloaiModel->GetInfotheloai($IdType);
-                        $this->view("admin",[
-                            "pages"  => "edittheloai",
-                            "result" => $kq,
-                            "name" =>   $ds,
-                        ]);      
-                    }
+                        if( $_theloai == null || $STT == null || $anhien == null){
+                            $ds = $this->theloaiModel->GetInfotheloai($IdType);
+                            $this->view("admin",[
+                                "pages"  => "edittheloai",
+                                "error" => "1",
+                                "name" =>   $ds,
+                            ]); 
+                        }
+                        else{
+                            $ds = $this->theloaiModel->GetInfotheloai($IdType);
+                            if(!preg_match($this->validate_name,$_theloai)){
+                                $this->view("admin",[
+                                    "pages" => "edittheloai",
+                                    "error" => "2",
+                                    "name" =>   $ds,
+                                ]);
+                            }
+                            else{
+                                if(!preg_match($this->validate_number,$STT)){     
+                                    $this->view("admin",[
+                                        "pages" => "edittheloai",
+                                        "error" => "3",
+                                        "name" =>   $ds,
+                                    ]);
+                                }
+                                else{
+                                    $kq = $this->theloaiModel->update_theloai($IdType,$_theloai,$STT,$anhien);
+                                    $_ds = $this->theloaiModel->GetInfotheloai($IdType);
+                                    $this->view("admin",[
+                                        "pages"  => "edittheloai",
+                                        "result" => $kq,
+                                        "name" =>   $_ds,
+                                    ]);   
+                                } 
+                            }  
+                        }
                     
+                    }
                 }
             }
             else{
@@ -423,9 +478,11 @@
             else{
                 if(isset($_SESSION['username'])){
                     $IdUser =  $_SESSION['IdUser'];
+                    $list_theloai = $this->theloaiModel->dstheloai();
                     if(isset($_POST['btn_addnoidung'])){
                         $this->view("admin",[
                             "pages" => "addnoidung",
+                            "list_theloai" => $list_theloai,
                         ]);
                     }
                     else{
@@ -439,19 +496,30 @@
                             $_Keyword = isset($_POST["Keyword"]) ?  htmlspecialchars($_POST["Keyword"]) : '';
                             $_IdNewsType = isset($_POST["IdNewsType"]) ?  htmlspecialchars($_POST["IdNewsType"]) : '';
                             $_Day = date("Y-m-d");
-                            $kq = $this->noidungModel->insert_noidung($Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdUser,$HotNews);
-                            $this->view("admin",[
-                                "pages" => "addnoidung",
-                                "result" => $kq
-                            ]);
-                        }
-                       else{
-                            if(isset($_POST['btn_addnoidung'])){
+                            if(     $Title == null || $HotNews == null || $_Overview == null || $_Detail == null || $_UrlPics == null || $_NewsAppear == null
+                                ||  $_Keyword == null ||  $_IdNewsType == null ||  $_Day == null )
+                            {
                                 $this->view("admin",[
                                     "pages" => "addnoidung",
+                                    "list_theloai" => $list_theloai,
+                                    "error" => "1",
                                 ]);
                             }
-                       }
+                            else{
+                                $kq = $this->noidungModel->insert_noidung($Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdUser,$HotNews);
+                                $this->view("admin",[
+                                    "pages" => "addnoidung",
+                                    "list_theloai" => $list_theloai,
+                                    "result" => $kq
+                                ]);
+                            }
+                        }
+                       else{
+                                $this->view("admin",[
+                                    "pages" => "addnoidung",
+                                    "list_theloai" => $list_theloai,
+                                ]);
+                        }
                     }
                 }
                 else{

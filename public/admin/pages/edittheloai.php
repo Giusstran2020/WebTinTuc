@@ -9,12 +9,20 @@
                     foreach($data["name"] as $theloai){
                 ?>
                 <form action="../edittheloai/<?php echo $theloai->IdType;?> "class="user" method="post">
-                    <label for="txt" class="input_left">Tên tiêu đề:</label>
-                    <input name="txt" type="text" value="<?php echo $theloai->TypeName;?>"  class=" input_right"></br>
+                    <label for="theloai" class="input_left">Tên tiêu đề:</label>
+                    <input name="theloai" type="text" value="<?php echo $theloai->TypeName;?>"  class=" input_right"></br>
                     <label for="txt_STT" class="input_left">Số Thứ Tự:</label>
                     <input name="txt_STT" type="text" value="<?php echo $theloai->TypeNumber;?>"  class=" input_right"></br>
                     <label for="txt_anhien" class="input_left">Ân hiện tin:</label>
-                    <input name="txt_anhien" type="text" value="<?php echo $theloai->TypeAppear;?>"  class=" input_right"></br>
+                    <?php   $anhien = ($theloai->TypeAppear == 0)? "Ẩn" : "Hiện";
+                            $_anhien = ($theloai->TypeAppear == 1)? "Ẩn" : "Hiện";
+                            $_TypeAppear = ($theloai->TypeAppear == 0)? "1" : "0";
+                    ?>
+                    <input name="anhien" type="text" value="<?php echo $anhien;?>"  class=" input_right" readonly></br>
+                    <select class="txt"  name="txt_anhien" id="txt_anhien">
+                            <option value="<?php echo $theloai->TypeAppear;?>"><p><?php echo $anhien;?></p></option>
+                            <option value="<?php echo $_TypeAppear;?>"><p><?php echo $_anhien;?></p></option>
+                        </select>
                     <button name="submit_edittheloai" class="add">Sửa</button>
                 </form>
             </div>
@@ -29,6 +37,23 @@
             echo "Sửa thành công";
         }
         else {echo "Sửa thất bại ";}
+    }
+    ?>
+    </h3>
+<?php }?>
+<?php if(isset($data["error"])){?>
+    <h3> 
+    <?php
+       switch ($data['error']) {
+        case 1:
+           echo "<p> Chưa điền đủ thông tin  !!!</p>";
+            break;
+        case 2:
+            echo "<p> Tên thể loại không hợp lệ !!!  !!!</p>";
+            break;
+        case 3:
+            echo "<p> Số thứ tự phải là số  !!!</p>";
+            break;
     }
     ?>
     </h3>

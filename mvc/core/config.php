@@ -25,7 +25,7 @@
     define('APPROOT',dirname(dirname(__FILE__)));
 
     //URLROOT 
-    define('URLROOT','http://localhost:8080/lab-03');
+    define('URLROOT','http://localhost:8080/lab-04');
 
     //SITENAME 
     define('SITENAME','WEB TIN TỨC');
