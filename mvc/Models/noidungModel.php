@@ -91,14 +91,20 @@
         }
         // ktra quyen user 
         public function check_iduser($IdUser,$IdNews){
+
             $this->db->query("SELECT IdUser FROM news WHERE IdNews = :IdNews");
             
             $this->db->bind(':IdNews',$IdNews);
 
             $result = $this->db->single();
 
-            $check = ($result->IdUser == $IdUser) ? "true" : "false";
+            $check = "false";
 
+            if(isset($result->IdUser)){
+
+            $check = ($result->IdUser == $IdUser) ? "true" : "false";
+            
+            }
 
             return $check;
         }

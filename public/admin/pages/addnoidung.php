@@ -23,12 +23,12 @@
                     <label for="Keyword" class="input_left">Từ khóa: </label>
                     <input name="Keyword" type="text" ></br>
                     <!--Data đổ về data['list_theloai'] -->
-                    <label for="IdNewsType" class="input_left">Thể loại: </label>
+                    <label for="IdNewsType" class="input_left">Loại tin: </label>
                     <select  name="IdNewsType" id="IdNewsType" >
                         <?php
-                            foreach( $data["list_theloai"] as $list_theloai){
+                            foreach( $data["list_loaitin"] as $list_loaitin){
                                 echo '
-                                        <option value="'.$list_theloai->IdType.'"><p>'.$list_theloai->TypeName.'</p></option>
+                                        <option value="'.$list_loaitin->IdNewsType.'"><p>'.$list_loaitin->NewsTypeName.'</p></option>
                                 ';                        
                             }
                         ?>

@@ -1,57 +1,100 @@
-<div class="content">
-            <div class="trangchu">
-                <p>Trang chủ</p>
-            </div>
-            <div class="container2">
-                <div class="row">
-                    <div class="detail_title bg_info hover_tieude">
-                        <div class="box_x">
-                            <div class="inner bg_info ">
-                                <h3>150</h3>
-                                <h4>THỂ LOẠI</h4>
-                            </div>
-                            <div class="icon-content">
-                                <i class="far fa-folder-open"></i>
-                            </div>
-                        </div>
-                                <a href="<?php echo URLROOT; ?>/admin/theloai" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                    <div class="detail_title bg_info green hover_tieude"> 
-                        <div class="box_x">
-                            <div class="inner bg_info green">
-                                <h3>10%</h3>
-                                <h4>NỘI DUNG</h4>
-                            </div>
-                            <div class="icon-content">
-                                <i class="fas fa-book-open"></i>
-                            </div>
-                    </div>
-                        <a href="<?php echo URLROOT; ?>/admin/noidung" class="small-box-footer green2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
-                     </div>
-                    <div class="detail_title bg_info yellow hover_tieude">
-                        <div class="box_x">
-                            <div class="inner bg_info  yellow ">
-                                <h3>10%</h3>
-                                <h4>QUẢNG CÁO</h4>
-                            </div>
-                            <div class="icon-content big_ad">
-                                <i class="fas fa-ad"></i>
-                            </div>
-                        </div>    
-                        <a href="<?php echo URLROOT; ?>/admin/quangcao" class="small-box-footer yellow2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                    <div class="detail_title bg_info red hover_tieude">
-                        <div class="box_x">
-                            <div class="inner bg_info red">
-                                <h3>25</h3>
-                                <h4>THÀNH VIÊN</h4>
-                            </div>
-                            <div class="icon-content">
-                                <i class="fas fa-address-card"></i>
-                            </div>
-                        </div>
-                        <a href="<?php echo URLROOT; ?>/admin/thanhvien" class="small-box-footer red2">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
+<div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Overview</li>
+          </ol>
+
+          <!-- Icon Cards-->
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-primary o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-comments"></i>
+                  </div>
+                  <div class="mr-5">8 Thể Loại!</div>
                 </div>
+                <a class="card-footer text-white clearfix small z-1" href="<?php echo URLROOT;?>/admin/theloai">
+                  <span class="float-left">Xem Chi Tiết</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
             </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-warning o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-address-card"></i>
+                  </div>
+                  <div class="mr-5">11 Thành Viên!</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="<?php echo URLROOT;?>/admin/thanhvien">
+                  <span class="float-left">Xem Chi Tiết</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-info o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-ad"></i>
+                  </div>
+                  <div class="mr-5">3 Quảng Cáo!</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="<?php echo URLROOT;?>/admin/quangcao">
+                  <span class="float-left">Xem Chi Tiết</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-success o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                  </div>
+                  <div class="mr-5">3  Loại tin !</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="<?php echo URLROOT;?>/admin/loaitin">
+                  <span class="float-left">Xem Chi Tiết</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-danger o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-life-ring"></i>
+                  </div>
+                  <div class="mr-5">18 Tin tức </div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="<?php echo URLROOT;?>/admin/noidung">
+                  <span class="float-left">Xem Chi Tiết</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          </div>
+
         </div>
+        <!-- /.container-fluid -->

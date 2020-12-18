@@ -14,7 +14,7 @@
             </div>
             <div class="container2">
                 <div class="List_title">
-                <form action="../editthanhvien<?php echo $edit; ?>" class="user" method="post">
+                <form action="/editthanhvien<?php echo $edit; ?>" class="user" method="post">
                     <?php 
                          foreach($data['infoUsser'] as $user){
                     ?>

@@ -7,6 +7,7 @@
                   <div style="background: white;">
                         <table class="table" width="100%">
                         <tbody><tr style = "font-weight: bold;"> 
+                        <td class="td">ID</td>
                         <td class="td">Tiêu đề</td>
                         <td class="td">Tóm tắt</td>
                         <td class="td">Nội dung</td>
@@ -18,6 +19,7 @@
                 
                         foreach($data["ds"] as $list){
                             echo"<tr>
+                                    <td class='tdcon'>".$list->IdNews."</td>
                                     <td class='tdcon'>".$list->Title."</td>
                                     <td class='tdcon'>".$list->Overview."</td>
                                     <td class='tdcon'>".$list->Detail."</td>

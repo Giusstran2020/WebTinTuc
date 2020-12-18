@@ -1,90 +1,147 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/4888640421.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/admin/CSS/admin.css">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Admin</title>
-</head>
-<body>
-    <div class="menu-left">
-        <div class="menu-top">
-            <a href="<?php echo URLROOT; ?>/admin" class="brand-link">
-                <img src="<?php echo URLROOT; ?>/public/admin/images/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
-                <span class="brand-text font-weight-light">Admin</span>
-            </a>
+
+    <!-- Bootstrap core CSS-->
+    <link href="<?php echo URLROOT;?>/public/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="<?php echo URLROOT;?>/public/admin/bootstrap/fonts/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="<?php echo URLROOT;?>/public/admin/bootstrap/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<?php echo URLROOT;?>/public/admin/css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="<?php echo URLROOT;?>/admin">
+      <?php
+                     if(isset($_SESSION['admin']))
+                     {
+                         echo "ADMIN - ";
+                         echo $_SESSION['admin'];
+                     }
+                     else{
+                        if(isset($_SESSION['username'])){
+                            echo "USER - ";
+                            echo $_SESSION['username'];
+                        }
+                     }
+                 ?>
+      </a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="<?php echo URLROOT;?>/admin">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
         </div>
-        <div class="menu-home">
-           <div class="menu-bar">
-            <ul>
-                <li class="icon icon-arrow-left" id="style-title" onclick="toggle_visibility('tieude','style-title');">
-                    <div class="box"><a class="icon-phone" href="#"><span><i class="far fa-folder-open"></i></span> Thể Loại</a></div>
-                    <div class="mp-level" id="tieude">
-                        <ul>
-                            <li><a href="<?php echo URLROOT; ?>/admin/theloai">Liệt kê thể loại</a></li>
-                            <li><a href="<?php echo URLROOT; ?>/admin/addtheloai">Thêm thể loại</a></li>
-                            <li><a href="<?php echo URLROOT; ?>/admin/theloai">Xoá thể loại</a></li>
-                            <li><a href="<?php echo URLROOT; ?>/admin/theloai">Sửa tiêu đề</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="icon icon-arrow-left" id="style-title2" onclick="toggle_visibility('thanhvien','style-title2');" >
-                    <div class="box"><a class="icon-tv" href="#" ><span><i class="fas fa-address-card"></i></span> Thành viên</a></div>
-                    <div class="mp-level" id="thanhvien">
-                        <ul>
-                            <li><a href="<?php echo URLROOT; ?>/admin/thanhvien">Liệt kê Thành viên</a></li>
-                            <li><a href="<?php echo URLROOT; ?>/admin/addthanhvien">Thêm Thành viên</a></li>
-                            <li><a href="#">Xoá Thành viên</a></li>
-                            <li><a href="<?php echo URLROOT; ?>/admin/avatarthanhvien">Ảnh đại diện Thành viên</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="icon icon-arrow-left" id="style-title3" onclick="toggle_visibility('quangcao','style-title3');">
-                    <div class="box"><a class="icon-camera" href="#" ><span><i class="fas fa-ad"></i></span>   Quảng cáo</a></div>
-                    <div class="mp-level" id="quangcao">
-                        <ul>
-                            <li><a href="<?php echo URLROOT; ?>/admin/quangcao">Liệt kê Quảng cáo</a></li>
-                            <li><a href="#">Thêm Quảng cáo</a></li>
-                            <li><a href="#">Xoá Quảng cáo</a></li>
-                            <li><a href="#">Sửa Quảng cáo</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="icon icon-arrow-left"  id="style-title4" onclick="toggle_visibility('noidung','style-title4');">
-                    <div class="box"><a class="icon-camera" href="#" ><span><i class="fas fa-book-open"></i></span>  Nội dung</a></div>
-                    <div class="mp-level" id="noidung">
-                        <ul>
-                            <li><a href="<?php echo URLROOT; ?>/admin/noidung">Liệt kê Nội dung</a></li>
-                            <li><a href="<?php echo URLROOT; ?>/admin/noidungpic">Hình ảnh của nội dung</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-           </div>
-        </div>
-    </div>
-    <!--SANG phân bên tay phải-->
-    <div class="header-right">
-        <!--phan top header-->
-        <div class="header">
-            <div class="title_left">
-                <div class="container">
-                    <div class="logo_home">
-                        <a class="logo" href="#">Logo-team</a>
-                        <a class="home" href="#">Home</a>
-                    </div>
-                </div>
-            </div>
-            <div class="title_right">
-                <div class="thongbao-message">
-                        <a  href="#"><i class="fab fa-facebook-messenger"></i></a>
-                        <a  href="#"><i class="far fa-bell"></i></a>
-                    <form action="<?php echo URLROOT;?>/admin/logout" id="logout" method="POST">
-                        <button name="btnLogout" form="logout" type="submit">Logout</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <span class="badge badge-danger">9+</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+            <a class="dropdown-item" href="#">Thông báo</a>
+            <a class="dropdown-item" href="#">Thông báo khác</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Thông báo ...</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-envelope fa-fw"></i>
+            <span class="badge badge-danger">7</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+            <a class="dropdown-item" href="#">Tin nhắn 1</a>
+            <a class="dropdown-item" href="#">Tin nhắn 2</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Tin nhắn ... </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#">Cài đặt</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="<?php echo URLROOT;?>/admin">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Trang quản trị</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <h6 class="dropdown-header">Quản trị viên</h6>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/thanhvien">Thành viên</a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/addthanhvien">Thêm thành viên</a>
+            <div class="dropdown-divider"></div>
+            <h6 class="dropdown-header">Quản trị thể loại:</h6>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/theloai">Thông tin thể lọai</a>
+            <h6 class="dropdown-header">Quản trị loại tin</h6>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/loaitin">Thông tin tin tức</a>
+            <h6 class="dropdown-header">Quản trị nội dung:</h6>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/noidung">Thông tin nội dung</a>
+            <h6 class="dropdown-header">Quản trị quảng cáo:</h6>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/quangcao">Thông tin quảng cáo</a>
+            <a class="dropdown-item" href="blank.html"></a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="charts.html">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Biểu đồ</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="tables.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Bảng</span></a>
+        </li>
+      </ul>
+      
+      <script src="https://kit.fontawesome.com/4888640421.js" crossorigin="anonymous"></script>

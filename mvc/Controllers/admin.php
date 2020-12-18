@@ -12,6 +12,7 @@
             $this->userModel = $this->model("usersModel");
             $this->noidungModel = $this->model("noidungModel");
             $this->theloaiModel = $this->model("theloaiModel");
+            $this->loaitinModel = $this->model("loaitinModel");
             $this->adminModel = $this->model("adminModel");
         }
         function SayHi(){
@@ -355,52 +356,16 @@
         }
         function editnoidung($IdNews){
             if(isset($_SESSION['admin'])){
-                if(isset($_POST["btn_editnoidung"])){
+                    $list_loaitin = $this->loaitinModel->dsloaitin();
                     $ds = $this->noidungModel->get_noidung($IdNews);
                     $this->view("admin",[
                         "pages" => "editnoidung",
                         "ds"    => $ds,
+                        "list_loaitin" => $list_loaitin,
                     ]);
-                }
-                else{
-                    if(isset($_POST["btn_submit"])){
-                        $ds = $this->noidungModel->get_noidung($IdNews);
-                        foreach($ds as $list){
-                            $IdNewsType = $list->IdNewsType;
-                        }
-                        $Title = isset($_POST["theloai"]) ?  htmlspecialchars($_POST["theloai"]) : '';
-                        $HotNews = isset($_POST["HotNews"]) ?  htmlspecialchars($_POST["HotNews"]) : '';
-                        $_Overview = isset($_POST["tomtat"]) ?  htmlspecialchars($_POST["tomtat"]) : '';
-                        $_Detail = isset($_POST["content"]) ?  htmlspecialchars($_POST["content"]) : '';
-                        $_UrlPics = isset($_POST["hinhanh"]) ?  htmlspecialchars($_POST["hinhanh"]) : '';
-                        $_NewsAppear = isset($_POST["anhien"]) ?  htmlspecialchars($_POST["anhien"]) : '';
-                        $_Keyword = isset($_POST["Keyword"]) ?  htmlspecialchars($_POST["Keyword"]) : '';
-                        $_IdNewsType = isset($_POST["IdNewsType"]) ?  htmlspecialchars($_POST["IdNewsType"]) : '';
-                        if(isset($_POST["day"])){
-                            $Day = date_create($_POST['day']);
-                            $_Day = date_format($Day,"Y/m/d");
-                        }else{
-                            $Day = getdate();
-                            $_Day = date_format($Day,"Y/m/d");
-                        }
-                        $kq = $this->noidungModel->update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType,$HotNews);
-                        $ds = $this->noidungModel->get_noidung($IdNews);
-                        $this->view("admin",[
-                            "pages" => "editnoidung",
-                            "result"    => $kq,
-                            "ds"    => $ds,
-                        ]);
-                    }
-                    else{
-                        $ds = $this->noidungModel->dsnoidung();
-                        $this->view("admin",[
-                            "pages" => "noidung",
-                            "ds"    => $ds,
-                        ]);
-                    }
-                }
             }
             else{
+                $list_loaitin = $this->loaitinModel->dsloaitin();
                 if(isset($_SESSION['username'])){
                     $IdUser = $_SESSION['IdUser'];
                     if(isset($_POST["btn_editnoidung"])){
@@ -409,6 +374,7 @@
                             $ds = $this->noidungModel->get_noidung($IdNews);
                             $this->view("admin",[
                             "pages" => "editnoidung",
+                            "list_loaitin" => $list_loaitin,
                             "ds"    => $ds,
                             ]);
                         }
@@ -421,40 +387,71 @@
                         }
                     }
                     else{
+                        $IdUser = $_SESSION['IdUser'];
                         if(isset($_POST["btn_submit"])){
-                            $ds = $this->noidungModel->get_noidung($IdNews);
-                            foreach($ds as $list){
-                                $IdNewsType = $list->IdNewsType;
+                            $check = $this->noidungModel->check_iduser($IdUser,$IdNews);
+                            if($check = "true"){
+                                $ds = $this->noidungModel->get_noidung($IdNews);
+                                foreach($ds as $list){
+                                    $IdNewsType = $list->IdNewsType;
+                                }
+                                $Title = isset($_POST["theloai"]) ?  htmlspecialchars($_POST["theloai"]) : '';
+                                $HotNews = isset($_POST["HotNews"]) ?  htmlspecialchars($_POST["HotNews"]) : '';
+                                $_Overview = isset($_POST["tomtat"]) ?  htmlspecialchars($_POST["tomtat"]) : '';
+                                $_Detail = isset($_POST["content"]) ?  htmlspecialchars($_POST["content"]) : '';
+                                $_UrlPics = isset($_POST["hinhanh"]) ?  htmlspecialchars($_POST["hinhanh"]) : '';
+                                $_NewsAppear = isset($_POST["anhien"]) ?  htmlspecialchars($_POST["anhien"]) : '';
+                                $_Keyword = isset($_POST["Keyword"]) ?  htmlspecialchars($_POST["Keyword"]) : '';
+                                $_IdNewsType = isset($_POST["IdNewsType"]) ?  htmlspecialchars($_POST["IdNewsType"]) : '';
+                                if(isset($_POST["day"])){
+                                    $Day = date_create($_POST['day']);
+                                    $_Day = date_format($Day,"Y/m/d");
+                                }else{
+                                    $Day = getdate();
+                                    $_Day = date_format($Day,"Y/m/d");
+                                }
+                            // ktra null 
+                                if( $Title == null ||
+                                    $HotNews == null ||
+                                    $_Overview == null ||
+                                    $_Detail == null ||
+                                    $_UrlPics == null ||
+                                    $_NewsAppear == null ||
+                                    $_Keyword == null ||
+                                    $_IdNewsType == null ||
+                                    $_Day == null ){
+                                        $this->view("admin",[
+                                            "pages" => "editnoidung",
+                                            "list_loaitin" => $list_loaitin,
+                                            "error"    => "1",
+                                            "ds"    => $ds,
+                                        ]);
+                                }
+                                else{
+                                    $kq = $this->noidungModel->update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType,$HotNews);
+                                    $_ds = $this->noidungModel->get_noidung($IdNews);
+                                    $this->view("admin",[
+                                        "pages" => "editnoidung",
+                                        "list_loaitin" => $list_loaitin,
+                                        "result"    => $kq,
+                                        "ds"    => $_ds,
+                                    ]);
+                                }
                             }
-                            $Title = isset($_POST["theloai"]) ?  htmlspecialchars($_POST["theloai"]) : '';
-                            $HotNews = isset($_POST["HotNews"]) ?  htmlspecialchars($_POST["HotNews"]) : '';
-                            $_Overview = isset($_POST["tomtat"]) ?  htmlspecialchars($_POST["tomtat"]) : '';
-                            $_Detail = isset($_POST["content"]) ?  htmlspecialchars($_POST["content"]) : '';
-                            $_UrlPics = isset($_POST["hinhanh"]) ?  htmlspecialchars($_POST["hinhanh"]) : '';
-                            $_NewsAppear = isset($_POST["anhien"]) ?  htmlspecialchars($_POST["anhien"]) : '';
-                            $_Keyword = isset($_POST["Keyword"]) ?  htmlspecialchars($_POST["Keyword"]) : '';
-                            $_IdNewsType = isset($_POST["IdNewsType"]) ?  htmlspecialchars($_POST["IdNewsType"]) : '';
-                            if(isset($_POST["day"])){
-                                $Day = date_create($_POST['day']);
-                                $_Day = date_format($Day,"Y/m/d");
-                            }else{
-                                $Day = getdate();
-                                $_Day = date_format($Day,"Y/m/d");
-                            }
-                            $kq = $this->noidungModel->update_noidung($IdNews,$Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdNewsType,$HotNews);
-                            $ds = $this->noidungModel->get_noidung($IdNews);
-                            $this->view("admin",[
-                                "pages" => "editnoidung",
-                                "result"    => $kq,
+                            else{
+                                $ds = $this->noidungModel->dsnoidung_user($IdUser);
+                                $this->view("admin",[
+                                "pages" => "noidung",
                                 "ds"    => $ds,
                             ]);
+                            }       
                         }
                         else{
-                            $ds = $this->noidungModel->dsnoidung_user($IdUser);
-                            $this->view("admin",[
-                            "pages" => "noidung",
-                            "ds"    => $ds,
-                        ]);
+                                $ds = $this->noidungModel->dsnoidung_user($IdUser);
+                                $this->view("admin",[
+                                "pages" => "noidung",
+                                "ds"    => $ds,
+                            ]);
                         }
                     }
                 }
@@ -478,11 +475,11 @@
             else{
                 if(isset($_SESSION['username'])){
                     $IdUser =  $_SESSION['IdUser'];
-                    $list_theloai = $this->theloaiModel->dstheloai();
+                    $list_loaitin = $this->loaitinModel->dsloaitin();
                     if(isset($_POST['btn_addnoidung'])){
                         $this->view("admin",[
                             "pages" => "addnoidung",
-                            "list_theloai" => $list_theloai,
+                            "list_loaitin" => $list_loaitin,
                         ]);
                     }
                     else{
@@ -501,7 +498,7 @@
                             {
                                 $this->view("admin",[
                                     "pages" => "addnoidung",
-                                    "list_theloai" => $list_theloai,
+                                    "list_loaitin" => $list_loaitin,
                                     "error" => "1",
                                 ]);
                             }
@@ -509,7 +506,7 @@
                                 $kq = $this->noidungModel->insert_noidung($Title,$_Overview,$_Detail,$_UrlPics,$_NewsAppear,$_Keyword,$_Day,$_IdNewsType,$IdUser,$HotNews);
                                 $this->view("admin",[
                                     "pages" => "addnoidung",
-                                    "list_theloai" => $list_theloai,
+                                    "list_loaitin" => $list_loaitin,
                                     "result" => $kq
                                 ]);
                             }
@@ -517,7 +514,7 @@
                        else{
                                 $this->view("admin",[
                                     "pages" => "addnoidung",
-                                    "list_theloai" => $list_theloai,
+                                    "list_loaitin" => $list_loaitin,
                                 ]);
                         }
                     }
@@ -648,6 +645,7 @@
                         $nameValidation = "/^[a-zA-Z0-9]*$/";
                         $fullname = $_POST["hovaten"];
                         $username = $_POST["username"];
+                        echo $username;
                         $permission = $_POST["permission"];
                         if(preg_match($nameValidation,$username)){
                             $password = $_POST["password"];
@@ -662,13 +660,25 @@
                                 $check_user = $this->userModel->check_user($username);
                                 $check_email = $this->userModel->check_email($email);
                                 if($check_user == "false" && $check_email == "false" ){
-                                    $kq = $this->userModel->insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission);
-                                    $listUsers = $this->userModel->getUsers();
-                                    $this->view("admin",[
-                                        "pages"  => "thanhvien",
-                                        "listUsers" => $listUsers,
-                                        "result" => $kq,
-                                    ]);
+                                    $year_brith = explode("/",$Birthday);
+                                    $year_now = explode("/",$RegisterDay);
+                                    $age = $year_now[0] - $year_brith[0];
+                                    if($age < 10){
+                                        $this->view("admin",[
+                                            "pages"  => "addthanhvien",
+                                            "error"  => "Tuổi phải lớn hơn 10",
+                                            "result" => "false",
+                                        ]);
+                                    }
+                                    else{
+                                        $kq = $this->userModel->insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission);
+                                        $listUsers = $this->userModel->getUsers();
+                                        $this->view("admin",[
+                                            "pages"  => "thanhvien",
+                                            "listUsers" => $listUsers,
+                                            "result" => $kq,
+                                        ]);
+                                    }
                                 }
                                 else{
                                     
@@ -788,8 +798,23 @@
 
         //Phâng quảng cáo 
         function quangcao(){
-            $this->view("admin",[
-                "pages" => "quangcao"
-            ]);
+            if(isset($_SESSION['admin'])){
+                $this->view("admin",[
+                    "pages" => "quangcao"
+                ]);
+            }
+            else{
+                if(isset($_SESSION['username'])){
+                    $this->view("admin",[
+                        "pages" => "quangcao"
+                    ]);
+                }
+                else{
+                    $this->view("admin",[
+                        "pages" => "login",
+                        "error" => "0"
+                    ]);
+                }
+            }
         }
     }
