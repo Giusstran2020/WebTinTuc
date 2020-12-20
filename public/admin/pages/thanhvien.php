@@ -114,13 +114,12 @@
                   <?php
                            
                               foreach($data['listUsers'] as $user){
-                               
                                echo"<tr><td>".$user->IdUser."</a></td>
                                        <td><a href='".URLROOT."/admin/editthanhvien/".$user->IdUser."'>".$user->Username."</td>
                                         <td>".$user->FullName."</td>
                                         <td>".$user->Email."</td>
                                         <td>".$user->IdGroup."</td>
-                                        <td>".$user->Gender."</td>
+                                        <td>".$user->Gender."</td>                      
                                         <td>".$user->RegisterDay."</td>
                                    </tr>";
                                }

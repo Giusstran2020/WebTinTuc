@@ -1,9 +1,9 @@
 <?php 
     class admin extends Controller{
-        public $adminModel;
-        public $userModel;
-        public $noidungModel;
-        public $theloaiModel;
+        private $adminModel;
+        private $userModel;
+        private $noidungModel;
+        private $theloaiModel;
         private $validate_number = "/^[0-9]]*$/";
         private $validate_username = "/^[a-zA-Z0-9]]*$/";
         private $validate_name = "/^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/";
@@ -643,50 +643,65 @@
             if(isset($_SESSION['admin'])){
                 if(isset($_POST["btnadd"]) ){
                         $nameValidation = "/^[a-zA-Z0-9]*$/";
-                        $fullname = $_POST["hovaten"];
-                        $username = $_POST["username"];
-                        echo $username;
-                        $permission = $_POST["permission"];
-                        if(preg_match($nameValidation,$username)){
-                            $password = $_POST["password"];
-                            $level = $_POST["level"];
-                            $email = $_POST["email"];
-                            if(filter_var($email,FILTER_VALIDATE_EMAIL)){
-                                $birth = date_create($_POST['birthday']);
-                                $Birthday = date_format($birth,"Y/m/d");
-                                $gender = $_POST["gender"];
-                                $avatar = URLROOT."public/user/images/image.JPG";
-                                $RegisterDay = date("Y/m/d");
-                                $check_user = $this->userModel->check_user($username);
-                                $check_email = $this->userModel->check_email($email);
-                                if($check_user == "false" && $check_email == "false" ){
-                                    $year_brith = explode("/",$Birthday);
-                                    $year_now = explode("/",$RegisterDay);
-                                    $age = $year_now[0] - $year_brith[0];
-                                    if($age < 10){
-                                        $this->view("admin",[
-                                            "pages"  => "addthanhvien",
-                                            "error"  => "Tuổi phải lớn hơn 10",
-                                            "result" => "false",
-                                        ]);
+                        $fullname = isset($_POST['hovaten']) ? $_POST['hovaten'] : "";
+                        $username = isset($_POST['username']) ? $_POST['username'] : "";
+                        $permission = isset($_POST['permission']) ? $_POST['permission'] : "";
+                        $password = isset($_POST['password']) ? $_POST['password'] : "";
+                        $level = isset($_POST['level']) ? $_POST['level'] : "";
+                        $email = isset($_POST['email']) ? $_POST['email'] : "";
+                        $temp_birth = isset($_POST['birthday']) ? $_POST['birthday'] : "";
+                        $get_birth = date_create($temp_birth);
+                        $Birthday = date_format($get_birth,"Y/m/d");
+                        $gender = isset($_POST['gender']) ? $_POST['gender'] : "";
+                        if($fullname == null || $username == null || $permission == null || $password == null || $level == null || $email == null || $Birthday == null || $gender == null){
+                            $this->view("admin",[
+                                "pages" => "addthanhvien",
+                                "error"  => "Vui lòng điền đủ thông tin",
+                                "result" => "false",
+                            ]);
+                        }
+                        else{
+                            if(preg_match($nameValidation,$username)){
+                                if(filter_var($email,FILTER_VALIDATE_EMAIL)){
+                                    $avatar = URLROOT."public/user/images/image.JPG";
+                                    $RegisterDay = date("Y/m/d");
+                                    $check_user = $this->userModel->check_user($username);
+                                    $check_email = $this->userModel->check_email($email);
+                                    if($check_user == "false" && $check_email == "false" ){
+                                        $year_brith = explode("/",$Birthday);
+                                        $year_now = explode("/",$RegisterDay);
+                                        $age = intval($year_now[0]) - intval($year_brith[0]);
+                                        if($age < 10){
+                                            $this->view("admin",[
+                                                "pages"  => "addthanhvien",
+                                                "error"  => "Tuổi phải lớn hơn 10",
+                                                "result" => "false",
+                                            ]);
+                                        }
+                                        else{
+                                            $token = md5($username)."LV".$level;
+                                            $kq = $this->userModel->insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission,$token);
+                                            $listUsers = $this->userModel->getUsers();
+                                            $this->view("admin",[
+                                                "pages"  => "thanhvien",
+                                                "listUsers" => $listUsers,
+                                                "result" => $kq,
+                                            ]);
+                                        }
                                     }
                                     else{
-                                        $kq = $this->userModel->insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission);
-                                        $listUsers = $this->userModel->getUsers();
+                                        $error = ($check_user == true) ? "User đã tồn tại" : "Email đã tồn tại";
                                         $this->view("admin",[
-                                            "pages"  => "thanhvien",
-                                            "listUsers" => $listUsers,
-                                            "result" => $kq,
+                                            "pages"  => "addthanhvien",
+                                            "error"  => $error,
+                                            "result" => "false",
                                         ]);
                                     }
                                 }
                                 else{
-                                    
-                                    $error = ($check_user == true) ? "User đã tồn tại" : "Email đã tồn tại";
-                                    
                                     $this->view("admin",[
-                                        "pages"  => "addthanhvien",
-                                        "error"  => $error,
+                                        "pages" => "addthanhvien",
+                                        "error"  => "Email sai định dạng",
                                         "result" => "false",
                                     ]);
                                 }
@@ -694,17 +709,10 @@
                             else{
                                 $this->view("admin",[
                                     "pages" => "addthanhvien",
-                                    "error"  => "Email sai định dạng",
+                                    "error"  => "Tên sai định dạng",
                                     "result" => "false",
                                 ]);
                             }
-                        }
-                        else{
-                            $this->view("admin",[
-                                "pages" => "addthanhvien",
-                                "error"  => "Tên sai định dạng",
-                                "result" => "false",
-                            ]);
                         }
                 }
                 else{

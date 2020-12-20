@@ -1,5 +1,6 @@
 
-        <!-- Sticky Footer -->
+      
+       <!-- Sticky Footer -->
         <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
@@ -37,13 +38,11 @@
         </div>
       </div>
     </div>
-
+    <script src="https://kit.fontawesome.com/4888640421.js" crossorigin="anonymous"></script>
     <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo URLROOT;?>/public/admin/jquery/jquery.min.js"></script>
+    <script src="<?php echo URLROOT;?>/public/admin/jquery/jquery.min.js" ></script>
     <script src="<?php echo URLROOT;?>/public/admin/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo URLROOT;?>/public/admin/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="<?php echo URLROOT;?>/public/admin/js/sb-admin.min.js"></script>

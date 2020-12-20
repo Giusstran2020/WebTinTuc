@@ -37,12 +37,14 @@
             return $result;
         }
         //check_user
-        public function check_user($IdUser){
+        public function check_user($username){
             // kiem tra coi user tồn tại chưa
-            $this->db->query("SELECT Username FROM users WHERE IdUser = :IdUser");
+            $this->db->query("SELECT Username FROM users WHERE Username = :username");
             
-            $this->db->bind(':IdUser',$IdUser);
+            $this->db->bind(':username',$username);
             
+            $this->db->single();
+
             $data_exists = ($this->db->rowCount() > 0) ? "true" : "false";
 
             return $data_exists;
@@ -103,8 +105,8 @@
 
         }
         // Insert User
-        public function insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission){
-            $this->db->query("INSERT INTO users VALUES(null,:fullname,:username,:password,:email,:RegisterDay,:level,:Birthday,:gender,:avatar,:privileges)");
+        public function insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission,$token){
+            $this->db->query("INSERT INTO users VALUES(null,:fullname,:username,:password,:email,:RegisterDay,:level,:Birthday,:gender,:avatar,:privileges,:token)");
          
             // bind value
             $this->db->bind(':fullname',$fullname);
@@ -117,13 +119,14 @@
             $this->db->bind(':RegisterDay',$RegisterDay);
             $this->db->bind(':Birthday',$Birthday);
             $this->db->bind(':privileges',$permission);
+            $this->db->bind(':token',$token);
             //
             $result = $this->db->execute();
         
             return  $result;
  
          }
-        // get info 1 user
+        // get info 1 user by ID
         public function GetInfoUser($IdUser){
             $this->db->query("SELECT * FROM users WHERE IdUser = :IdUser");
             
@@ -167,6 +170,11 @@
         
             return  $result;
         }
-        
+        public function rowCount(){
+            
+            $result = $this->db->rowCount();
+
+            return $result;
+        }
 }
 ?>

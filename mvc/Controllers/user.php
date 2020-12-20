@@ -117,7 +117,8 @@
                                 $check_user = $this->userModel->check_user($username);
                                 $check_email = $this->userModel->check_email($email);
                                 if($check_user == "false" && $check_email == "false" ){
-                                    $kq = $this->userModel->insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission);
+                                    $token = md5($username)."LV".$level;
+                                    $kq = $this->userModel->insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission,$token);
                                     $this->view("user",[
                                         "pages"  => "login",
                                     ]);

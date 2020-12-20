@@ -78,4 +78,5 @@
             $this->execute();
             return $this->statement->fetch(PDO::FETCH_COLUMN, 1);
         }
+
     }

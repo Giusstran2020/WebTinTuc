@@ -143,5 +143,3 @@
             <span>Bảng</span></a>
         </li>
       </ul>
-      
-      <script src="https://kit.fontawesome.com/4888640421.js" crossorigin="anonymous"></script>
