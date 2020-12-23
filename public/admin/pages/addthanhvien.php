@@ -49,10 +49,22 @@
                     <div class="form-group col-md-4">
                     <label for="permission">Phân quyền</label>
                     <select name="permission" id="permission" class="form-control">
-                        <option value="1" selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    <?php 
+                        if(isset($data['list_permission'])){
+                            foreach($data['list_permission'] as $list_permission){
+                                if($list_permission->IdPer == '1'){
+                                    echo'
+                                    <option value="'.$list_permission->IdPer.'"selected >'.$list_permission->Name_per.'</option>
+                                    ';
+                                }
+                                else{
+                                    echo '
+                                    <option value="'.$list_permission->IdPer.'" >'.$list_permission->Name_per.'</option>
+                            ';
+                                }
+                        }}
+                        ?>
+                    </select>
                     </select>
                     </div>
                     <div class="form-group col-md-2">

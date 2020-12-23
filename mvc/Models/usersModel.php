@@ -176,5 +176,13 @@
 
             return $result;
         }
+        public function Get_permission(){
+            $this->db->query("SELECT * FROM permission");
+            
+            $result = $this->db->resultSet();
+
+            return $result;
+
+        }
 }
 ?>

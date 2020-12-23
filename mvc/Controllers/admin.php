@@ -111,7 +111,6 @@
                     $this->view("admin",[
                     "pages" => "theloai",
                     "ds"    => $listtheloai,
-                    "privileges" => $_SESSION['privileges']
                 ]);
                 }
                 else{
@@ -127,9 +126,9 @@
             if(isset($_SESSION['username']) || isset($_SESSION['admin'])){
                 if(isset($_POST["btn_addtheloai"])){   
                     $theloai = $_POST['theloai'];
-                    $STT = $_POST['txt_STT'];
+                    $stt = $_POST['txt_STT'];
                     $anhien = $_POST['txt_anhien'];
-                    if($theloai == null || $STT = null || $anhien == null){
+                    if($theloai == null || $stt == null || $anhien == null){
                         $this->view("admin",[
                             "pages" => "addtheloai",
                             "error" => "1",
@@ -143,7 +142,8 @@
                             ]);
                         }
                         else{
-                            if(!preg_match($this->validate_number,$STT)){     
+                            
+                            if(!preg_match($this->validate_number,$stt)){     
                                 $this->view("admin",[
                                     "pages" => "addtheloai",
                                     "error" => "3",
@@ -152,9 +152,10 @@
                             else{
                                 $check_theloai = $this->theloaiModel->check_theloai($theloai);
                                 if($check_theloai == "false"){
-                                    $kq = $this->theloaiModel->Insert_theloai($theloai,$STT,$anhien);
+                                    $kq = $this->theloaiModel->Insert_theloai($theloai,$stt,$anhien);
                                     $this->view("admin",[
                                         "pages"  => "addtheloai",  
+                                        "result" => "true"
                                     ]);  
                                 }
                                 else{
@@ -204,7 +205,8 @@
             }
         }
         
-        function edittheloai($IdType){
+        function edittheloai($param=null){
+            $IdType = $param[0];
             if(isset($_SESSION['username']) || isset($_SESSION['admin'])){
                 if(isset($_POST["btn_edittheloai"])){
                         $ds = $this->theloaiModel->GetInfotheloai($IdType);
@@ -575,9 +577,9 @@
             }
 
         }
-        function deleteUser($IdUser){
+        function deleteUser($IdUser=null){
             if(isset($_SESSION['admin'])){
-                $kq = $this->userModel->deleteUser($IdUser);
+                $kq = $this->userModel->deleteUser($IdUser[0]);
                 $listUsers = $this->userModel->getUsers();
                 $this->view("admin",[
                     "pages" => "thanhvien",
@@ -598,9 +600,10 @@
                 ]);
             }
         }
-        function editthanhvien($IdUser){
+        function editthanhvien($IdUser=null){
             if(isset($_SESSION['admin'])){
-                $result = $this->userModel->GetInfoUser($IdUser);
+                $result = $this->userModel->GetInfoUser($IdUser[0]);
+                $list_permission = $this->userModel->Get_permission();
                 if(isset($_POST["btnEdit"]) ){
                     $fullname = $_POST["hovaten"];
                     $password = $_POST["password"];
@@ -611,11 +614,12 @@
                     $gender = $_POST["gender"];
                     $permission = $_POST["permission"];
                     $avatar = URLROOT."public/user/images/image.JPG";
-                    $kq = $this->userModel->updatetUser($fullname,$IdUser,$password,$email,$level,$gender,$Birthday,$permission);
+                    $kq = $this->userModel->updatetUser($fullname,$IdUser[0],$password,$email,$level,$gender,$Birthday,$permission);
                     $listUsers = $this->userModel->getUsers();
                     $this->view("admin",[
                         "pages"  => "thanhvien",
                         "listUsers" => $listUsers,
+                        "list_permission" => $list_permission,
                         "result" => $kq,
                     ]);
                 }
@@ -623,6 +627,7 @@
                     $this->view("admin",[
                         "pages" => "editthanhvien",
                         "infoUsser" => $result,
+                        "list_permission" => $list_permission,
                     ]);
                 }
             }
@@ -641,6 +646,7 @@
         }
         function addthanhvien(){
             if(isset($_SESSION['admin'])){
+                $list_permission = $this->userModel->Get_permission();
                 if(isset($_POST["btnadd"]) ){
                         $nameValidation = "/^[a-zA-Z0-9]*$/";
                         $fullname = isset($_POST['hovaten']) ? $_POST['hovaten'] : "";
@@ -650,12 +656,12 @@
                         $level = isset($_POST['level']) ? $_POST['level'] : "";
                         $email = isset($_POST['email']) ? $_POST['email'] : "";
                         $temp_birth = isset($_POST['birthday']) ? $_POST['birthday'] : "";
-                        $get_birth = date_create($temp_birth);
-                        $Birthday = date_format($get_birth,"Y/m/d");
+                        $Birthday = date("Y/m/d", strtotime($temp_birth));
                         $gender = isset($_POST['gender']) ? $_POST['gender'] : "";
                         if($fullname == null || $username == null || $permission == null || $password == null || $level == null || $email == null || $Birthday == null || $gender == null){
                             $this->view("admin",[
                                 "pages" => "addthanhvien",
+                                "list_permission" => $list_permission,
                                 "error"  => "Vui lòng điền đủ thông tin",
                                 "result" => "false",
                             ]);
@@ -675,6 +681,7 @@
                                             $this->view("admin",[
                                                 "pages"  => "addthanhvien",
                                                 "error"  => "Tuổi phải lớn hơn 10",
+                                                "list_permission" => $list_permission,
                                                 "result" => "false",
                                             ]);
                                         }
@@ -685,6 +692,7 @@
                                             $this->view("admin",[
                                                 "pages"  => "thanhvien",
                                                 "listUsers" => $listUsers,
+                                                "list_permission" => $list_permission,
                                                 "result" => $kq,
                                             ]);
                                         }
@@ -693,6 +701,7 @@
                                         $error = ($check_user == true) ? "User đã tồn tại" : "Email đã tồn tại";
                                         $this->view("admin",[
                                             "pages"  => "addthanhvien",
+                                            "list_permission" => $list_permission,
                                             "error"  => $error,
                                             "result" => "false",
                                         ]);
@@ -702,6 +711,7 @@
                                     $this->view("admin",[
                                         "pages" => "addthanhvien",
                                         "error"  => "Email sai định dạng",
+                                        "list_permission" => $list_permission,
                                         "result" => "false",
                                     ]);
                                 }
@@ -710,6 +720,7 @@
                                 $this->view("admin",[
                                     "pages" => "addthanhvien",
                                     "error"  => "Tên sai định dạng",
+                                    "list_permission" => $list_permission,
                                     "result" => "false",
                                 ]);
                             }
@@ -718,6 +729,7 @@
                 else{
                     $this->view("admin",[
                         "pages" => "addthanhvien",
+                        "list_permission" => $list_permission,
                     ]);
                 }
                 }

@@ -123,6 +123,7 @@
             <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Quản trị thể loại:</h6>
             <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/theloai">Thông tin thể lọai</a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/addtheloai">Thêm thể lọai</a>
             <h6 class="dropdown-header">Quản trị loại tin</h6>
             <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/loaitin">Thông tin tin tức</a>
             <h6 class="dropdown-header">Quản trị nội dung:</h6>
@@ -133,13 +134,23 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="#">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Biểu đồ</span></a>
+            <span>Thể Loại</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" href="#">
             <i class="fas fa-fw fa-table"></i>
-            <span>Bảng</span></a>
+            <span>Loại tin</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Nội dung</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Quảng cáo</span></a>
         </li>
       </ul>

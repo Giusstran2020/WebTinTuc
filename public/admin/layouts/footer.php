@@ -46,6 +46,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?php echo URLROOT;?>/public/admin/js/sb-admin.min.js"></script>
+    <script src="<?php echo URLROOT;?>/public/admin/js/admin.js" ></script>
 
     <!-- Page level plugin JavaScript-->
     <script src="<?php echo URLROOT;?>/public/admin/datatables/jquery.dataTables.js"></script>

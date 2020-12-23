@@ -9,22 +9,25 @@
 
            //xu li controller
             if(file_exists("./mvc/Controllers/".$arr[0].".php")){
-                    $this->controller = $arr[0];                    
+                    $this->controller = $arr[0];
+                    array_shift($arr);                    
                 }
-                unset($arr[0]);
            require_once "./mvc/Controllers/".$this->controller.".php";
-           $this->controller = new $this->controller;
+           $controller = new $this->controller;
            
            // xu li action
-            if(isset($arr[1])){
-                if( method_exists( $this->controller, $arr[1])){
-                    $this->action = $arr[1];
+            if(isset($arr[0])){
+                if( method_exists( $controller, $arr[0])){
+                    $this->action = $arr[0];
+                    array_shift($arr); 
                 }
-                unset($arr[1]);
             } 
             // xu li params
-            $this->params = $arr?array_values($arr) : [];            
-            call_user_func_array([$this->controller,$this->action],$this->params);
+            $this->params = $arr;         
+            // call_user_func_array([$this->controller,$this->action],$this->params);
+            $action = $this->action;
+            $params = $this->params;
+            $controller->$action($params);
         }
         
         // xu li thanh dia chi
@@ -34,7 +37,10 @@
             }
                 else {
                     $arr[0] = $this->controller;
+                    array_shift($_GET['url']);
                     $arr[1] = $this->action;
+                    array_shift($_GET['url']);
+                    $arr[2] = $_GET['url'];
                     return $arr;
                     }
         }
