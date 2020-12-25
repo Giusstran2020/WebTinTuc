@@ -49,8 +49,12 @@
          }
          //  delete 1 the loai
         public function delete_noidung($IdNews,$IdNewsType){
-           $this->db->query("DELETE FROM news WHERE `news`.`IdNews` = '$IdNews' AND `news`.`IdNewsType` = '$IdNewsType'");
+           $this->db->query("DELETE FROM news WHERE IdNews = :IdNews AND IdNewsType = :IdNewsType");
             
+
+           $this->db->bind(':IdNews',$IdNews);
+           $this->db->bind(':IdNewsType',$IdNewsType);
+           
             $result = $this->db->execute();
 
             if(isset($result)){

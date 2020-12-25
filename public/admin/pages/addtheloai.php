@@ -29,30 +29,28 @@
                 </div>
                 <button type="submit" name="btn_addtheloai" class="btn btn-primary mb-2">Thêm</button>
             </form>
-            <div>
+            <h3> 
             <?php if(isset($data["result"])){?>
-                <h3> 
                 <?php
                     if($data["result"]=="true"){
-                        echo "<p>Thêm thành công</p>";
+                        echo "Thêm thành công";
                         }
                     }
                     if(isset($data['error'])){
                         switch ($data['error']) {
                             case 1:
-                               echo "<p> Chưa điền đủ thông tin  !!!</p>";
+                               echo "Chưa điền đủ thông tin  !!!";
                                 break;
                             case 2:
-                                echo "<p> Tên thể loại không hợp lệ !!!  !!!</p>";
+                                echo "Tên thể loại không hợp lệ !!!  !!!";
                                 break;
                             case 3:
-                                echo "<p> Số thứ tự phải là số  !!!</p>";
+                                echo "Số thứ tự phải là số  !!!";
                                 break;
                     }
                 ?>
                 </h3>
             <?php }?>
-            </div>
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>

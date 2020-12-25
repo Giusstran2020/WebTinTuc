@@ -1,69 +1,109 @@
-<div class="content">
-            <div class="trangchu">
-                <p>Thêm nội dung</p>
-            </div>
-            <div class="container2">
-                <div class="List_title">
-                  <div style="background: white;">
-                <form action="" class="noidung" method="post" enctype="multipart/form-data"> 
-                    <label for="theloai" class="input_left">Tên tiêu đề:</label>
-                    <input name="theloai" type="text" ></br>
-                    <label for="tomtat" class="input_left">Tóm tắt:</label>
-                    <textarea name="tomtat" type="text" rows="6"></textarea></br>
-                    <label for="content" class="input_left">Nội dung:</label>
-                    <textarea name="content" type="text" rows="6"></textarea></br>
-                    <label for="hinhanh" class="input_left">Hình ảnh</label>
-                    <input name="hinhanh" type="text" ></br>
-                    <!--An hien tin-->
-                    <label for="anhien" class="input_left">Ẩn hiện: </label>
-                    <select  name="anhien" id="txt_anhien">
-                            <option value="0"><p>Ẩn</p></option>
-                            <option value="1"><p>Hiện</p></option>
-                    </select></br>
-                    <label for="Keyword" class="input_left">Từ khóa: </label>
-                    <input name="Keyword" type="text" ></br>
-                    <!--Data đổ về data['list_theloai'] -->
-                    <label for="IdNewsType" class="input_left">Loại tin: </label>
-                    <select  name="IdNewsType" id="IdNewsType" >
-                        <?php
-                            foreach( $data["list_loaitin"] as $list_loaitin){
-                                echo '
-                                        <option value="'.$list_loaitin->IdNewsType.'"><p>'.$list_loaitin->NewsTypeName.'</p></option>
-                                ';                        
+<div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Thêm nội dung</li>
+          </ol>
+          <!-- Icon Cards-->
+            <form action="<?php echo URLROOT;?>/admin/addnoidung" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                    <label for="Title">Tên tiêu đề:</label>
+                    <input type="text" name="Title" class="form-control" required="required" placeholder="Tên tiêu đề" >
+                </div>
+                <div class="form-group">
+                    <label for="Overview">Tóm tắt</label>
+                    <input type="text"  name="Overview" class="form-control" required="required" id="exampleInputPassword1" placeholder="Tóm tắt nội dung">
+                </div>
+                <div class="form-group">
+                    <label for="UrlPics">Hình ảnh</label>
+                    <input type="file" name="UrlPics" id="fileupload">
+                </div>
+                <div class="form-group">
+                <label for="Detail">Nội dung</label>
+                <textarea class="form-control" name="Detail" id="exampleFormControlTextarea1" required="required" placeholder="Nhập vào nội dung" rows="5"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                    <label for="Keyword">Từ Khóa</label>
+                    <input type="text" name="Keyword" class="form-control"required="required"  placeholder="Từ Khóa">
+                    </div>
+                    <div class="form-group col-md-2">
+                    <label for="anhien">Ẩn hiện tin</label>
+                    <select name="anhien" class="form-control">
+                        <option value="0" > >Ẩn</option>
+                        <option value="1" selected >Hiện</option>
+                    </select>
+                    </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                    <label for="HotNews">Nổi bật</label>
+                    <select name="HotNews" class="form-control">
+                        <option value="0" selected >Không</option>
+                        <option value="1" >Có</option>
+                    </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                    <label for="IdNewsType">Loại tin</label>
+                    <select name="IdNewsType" class="form-control">
+                    <?php
+                    if(isset($data['list_loaitin'])){
+                        foreach($data['list_loaitin'] as $list_loaitin){
+                            if($list_loaitin->IdNewsType == 0){
+                                echo '<option value="'.$list_loaitin->IdNewsType.'" selected>'.$list_loaitin->NewsTypeName.'</option>';
                             }
-                        ?>
-                        </select></br>
-                    <label for="HotNews" class="input_left">Tin nổi bật: </label>
-                    <input name="HotNews" type="text" ></br>
-
-                    <button class="add" name = "btn_submit">Thêm</button>
-                </form>
-                </div>
-                </div>
+                            else{
+                                echo '<option value="'.$list_loaitin->IdNewsType.'">'.$list_loaitin->NewsTypeName.'</option>';
+                            }
+                        }
+                    }
+                ?>
+                </select>
             </div>
-</div>
-<?php if(isset($data["result"])){?>
-    <h3> 
-    <?php
-        if($data["result"] == "true"){
-            echo "Thêm thành công ";
-        }
-        else {echo "Thêm thất bại";}
-        
-    ?>
-    </h3>
-<?php }
-?>
-<?php if(isset($data["error"])){?>
-    <h3> 
-    <?php
-       switch ($data['error']) {
-        case 1:
-           echo "<p> Chưa điền đủ thông tin  !!!</p>";
-            break;
-    }
-    ?>
-    </h3>
-<?php }?>
+            <button type="submit" name="btn_addnoidung" class="btn btn-primary mb-2">Thêm</button>
+            </form>
+            <div>
+            <h6> 
+            <?php if(isset($data["result"])){?>
+                <?php
+                    if($data["result"]=="true"){
+                        echo "Thêm thành công";
+                    }
+                    else{
+                        echo "Thêm thất bại";
+                    }
+                    if(isset($data["error"])){
+                        switch ($data['error']) {
+                            case 1:
+                            echo "<p> Chưa điền đủ thông tin  !!!</p>";
+                                break;
+                            case 2:
+                                echo "<p> Tên Loại Tin không hợp lệ !!!  !!!</p>";
+                                break;
+                            case 3:
+                                echo "<p> Số thứ tự phải là số  !!!</p>";
+                                break;
+                            case 4:
+                                echo "<p> Tên Loại Tin đã tồn tại  !!!</p>";
+                                break;
+                    }
+                    }
+                    if(isset($data["messages"])){
+                        foreach($data["messages"] as $error){
+                            echo '<br>'.$error;
+                        }
+                    }
+                ?>
+                </h6>
+            <?php }?>
+            </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          </div>
 
-    
+        </div>
+        <!-- /.container-fluid -->

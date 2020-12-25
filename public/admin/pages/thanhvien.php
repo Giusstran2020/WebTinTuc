@@ -7,7 +7,6 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Tables</li>
             <li class="breadcrumb-item active">
                 <?php
                      if(isset($_SESSION['admin']))

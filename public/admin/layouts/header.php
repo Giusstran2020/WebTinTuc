@@ -94,7 +94,7 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="#">Cài đặt</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/logout">Logout</a>
           </div>
         </li>
       </ul>
@@ -122,34 +122,39 @@
             <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/addthanhvien">Thêm thành viên</a>
             <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Quản trị thể loại:</h6>
-            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/theloai">Thông tin thể lọai</a>
-            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/addtheloai">Thêm thể lọai</a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/theloai">Thông tin thể loại</a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/addtheloai">Thêm thể loại</a>
+            <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Quản trị loại tin</h6>
-            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/loaitin">Thông tin tin tức</a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/loaitin">Thông tin loại tin</a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/addloaitin">Thêm loại tin </a>
+            <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Quản trị nội dung:</h6>
             <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/noidung">Thông tin nội dung</a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/addnoidung">Thêm nội dung </a>
+            <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Quản trị quảng cáo:</h6>
             <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/quangcao">Thông tin quảng cáo</a>
-            <a class="dropdown-item" href="blank.html"></a>
+            <a class="dropdown-item" href="<?php echo URLROOT;?>/admin/addquangcao">Thêm quảng cáo </a>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="<?php echo URLROOT;?>/admin/theloai">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Thể Loại</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="<?php echo URLROOT;?>/admin/loaitin">
             <i class="fas fa-fw fa-table"></i>
             <span>Loại tin</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="<?php echo URLROOT;?>/admin/noidung">
             <i class="fas fa-fw fa-table"></i>
             <span>Nội dung</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="<?php echo URLROOT;?>/admin/quangcao">
             <i class="fas fa-fw fa-table"></i>
             <span>Quảng cáo</span></a>
         </li>

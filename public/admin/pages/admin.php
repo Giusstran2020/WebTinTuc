@@ -82,7 +82,7 @@
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-life-ring"></i>
                   </div>
-                  <div class="mr-5">18 Tin tức </div>
+                  <div class="mr-5">18 Nội Dung </div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="<?php echo URLROOT;?>/admin/noidung">
                   <span class="float-left">Xem Chi Tiết</span>

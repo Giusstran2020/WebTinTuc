@@ -1,4 +1,4 @@
- <div id="content-wrapper">
+<div id="content-wrapper">
 
 <div class="container-fluid">
 
@@ -33,43 +33,51 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th>ID Thể Loại</th>
-                <th>Tên Thể Loại</th>
+                <th>ID Loại Tin</th>
+                <th>Tên Loại Tin</th>
                 <th>Số Thứ Tự</th>
                 <th>Ẩn Hiện Tin</th>
+                <th>Thể Loại</th>
                 <th>Xóa</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
-                <th>ID Thể Loại</th>
-                <th>Tên Thể Loại</th>
+                <th>ID Loại Tin</th>
+                <th>Tên Loại Tin</th>
                 <th>Số Thứ Tự</th>
                 <th>Ẩn Hiện Tin</th>
+                <th>Thể Loại</th>
                 <th>Xóa</th>
             </tr>
           </tfoot>
           <tbody>
           <?php
-                   
-                      foreach($data['ds'] as $ds_theloai){
-                       echo"<tr><td>".$ds_theloai->IdType."</a></td>
-                               <td><a href='".URLROOT."/admin/edittheloai/".$ds_theloai->IdType."'>".$ds_theloai->TypeName."</td>
-                                <td>".$ds_theloai->TypeNumber."</td>
-                                <td>".$ds_theloai->TypeAppear."</td>
-                                <td>
-                                  <form method='post' action='".URLROOT."/admin/delete_theloai/".$ds_theloai->IdType."'>
-                                    <button type='submit' name='btn_delete_theloai' class='btn btn-danger '> Xóa </button>
-                                  </form>
-                                </td>
-                           </tr>";
-                       }
-                       ?>
+                foreach($data['list_all_loaitin'] as $list_all_loaitin){
+                    echo"<tr><td>".$list_all_loaitin->IdNewsType."</a></td>
+                        <td><a href='".URLROOT."/admin/editloaitin/".$list_all_loaitin->IdNewsType."'>".$list_all_loaitin->NewsTypeName."</td>
+                        <td>".$list_all_loaitin->NewsTypeNumber."</td>
+                        <td>".$list_all_loaitin->NewsTypeAppear."</td>";
+                    if(isset($data['listtheloai'])){
+                        foreach($data['listtheloai'] as $listtheloai){
+                            if($listtheloai->IdType == $list_all_loaitin->IdType){
+                                echo "<td>".$listtheloai->TypeName."</td>";
+                            }
+                        }
+                    }
+                    echo "
+                        <td>
+                            <form method='post' action='".URLROOT."/admin/delete_loaitin/".$list_all_loaitin->IdNewsType."'>
+                            <button type='submit' name='btn_delete_loaitin' class='btn btn-danger '> Xóa </button>
+                            </form>
+                        </td>
+                    </tr>";
+                }
+                ?>
           </tbody>
         </table>
       </div>
-    </div>
-    <h6>
+      <h6>
     <?php 
        if(isset($data['error'])){
          echo "<script> alert('";
@@ -85,6 +93,7 @@
   }
     ?>
     </h6>
+    </div>
     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
   </div>
 

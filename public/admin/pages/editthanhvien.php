@@ -1,44 +1,3 @@
-<!-- <?php /*if(isset($data["infoUsser"])) 
-        {
-            foreach($data['infoUsser'] as $user)
-            $edit = "/".$user->IdUser;
-        }
-       
-        else {$edit = "";}*/
-?>
-
-
-<div class="content">
-            <div class="trangchu">
-                <p>Thay Đổi Thông Tin Thành Viên</p>
-            </div>
-            <div class="container2">
-                <div class="List_title">
-                <form action="/editthanhvien" class="user" method="post">
-                    <label for="username" class="input_left">Username:</label>
-                    <input name="username" type="text" value="<?php/* echo $user->Username?>" readonly  class=" input_right"></br>
-                    <label for="password" class="input_left">Password:</label>
-                    <input name="password" type="password" value="<?php echo $user->Password;?>" class="input_right"></br>
-                    <label for="hovaten" class="input_left">Họ và Tên:</label> 
-                    <input  name="hovaten" type="text" value="<?php echo $user->FullName;?>" class="input_right"></br>
-                    <label for="email" class="input_left">Email:</label>
-                    <input name="email" type="text" value="<?php echo $user->Email;?>" class="input_right"></br>
-                    <label for="birthday" class="input_left">Ngày sinh:</label>
-                    <input  name="birthday" type="text" value="<?php echo $user->BirthDay;?>" class="input_right"></br>
-                    <label for="gender" class="input_left">Gender:</label>
-                    <input  name="gender" type="text" value="<?php echo $user->Gender;?>" class="input_right"></br>
-                    <label for="level" class="input_left">Level:</label>
-                    <input  name="level" type="text" value="<?php echo $user->IdGroup;?>" class="input_right"></br>
-                    <lable for="permission" class="input_left">Phân Quyền: </lable>
-                    <input name="permission" type="text" value="<?php echo $user->privileges;?>" class="input_right" placeholder="1-2-3-4"></br>
-                    <button class="add_noidung" name = "btnEdit">Thay đổi</button>
-                
-                </form>
-            </div>
-        </div>
-        </div> -->
-*/?>
--->
 <div id="content-wrapper">
 
         <div class="container-fluid">
@@ -101,7 +60,7 @@
                     </div>
                     <div class="form-group col-md-4">
                     <label for="permission">Phân quyền</label>
-                    <select name="permission" id="permission" class="form-control">
+                    <select name="permission" class="form-control">
                     <?php 
                         if(isset($data['list_permission'])){
                             foreach($data['list_permission'] as $list_permission){
@@ -139,7 +98,7 @@
                         <option value="1" <?php echo $IdGroup_1;?>>Người dùng</option>
                     </select>
                 </div>
-                <button type="submit" name="btnEdit" class="btn btn-primary mb-2">Sửa</button>
+                <button type="submit" name="btnEdit" class="btn btn-primary mb-2">Cập Nhật</button>
             </form>
             <?php }?>
             <div>
@@ -147,12 +106,29 @@
                 <h3> 
                 <?php
                     if($data["result"]=="true"){
-                        echo "update thành công";
+                        echo "Cập nhật thành công";
+                    }else{
+                        echo "Cập nhật thành công";
                     }
-                    else {echo $data["error"];}
+                }
+                if(isset($data["error"])){
+                    switch ($data['error']) {
+                        case 1:
+                           echo "<p> Chưa điền đủ thông tin  !!!</p>";
+                            break;
+                        case 2:
+                            echo "<p> Tên thể loại không hợp lệ !!!  !!!</p>";
+                            break;
+                        case 3:
+                            echo "<p> Số thứ tự phải là số  !!!</p>";
+                        case 4:
+                            echo "<p> Tuổi phải lớn hơn 10 !!!</p>";
+                            break;
+                    }
+                }
+                
                 ?>
                 </h3>
-            <?php }?>
             </div>
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
