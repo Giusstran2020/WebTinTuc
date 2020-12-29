@@ -5,8 +5,8 @@
     <div class="container-fluid all_footer_right_reserved">
         <div class="container">
             <div class="row  ">
-                <div class="col-12 col-md-6 py-4 Reserved"> 18521133_Tran Van Nam  </div>
-                <div class="col-12 col-md-6 py-4 Reserved"> 18521133_Tran Van Nam  </div>
+                <div class="col-12 col-md-6 py-4 Reserved"> Nguyễn Minh Nhựt </div>
+                <div class="col-12 col-md-6 py-4 Reserved"> Nguyễn Minh Nhựt </div>
                 <div class="col-12 col-md-6 spdp_right py-4">
                     <a href="index.html" class="footer_last_part_menu">Home</a>
                     <a href="Contact_us.html" class="footer_last_part_menu">About</a>
@@ -25,8 +25,7 @@
 
 
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
     <script src="<?php echo URLROOT ?>/public/user/js/owl.carousel.min.js"></script>
     <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"

@@ -13,7 +13,7 @@
                                                 <div class="all_suceeall_height_position_absolute"></div>
                                                 <div class="all_suceeall_height_position_absolute_font">
                                                 <div class=""><a href="#" class="color_fff"></a></div>';
-                                        echo '<div class=""><a href="single.html" class="all_good_font">'.$dsnoidung->Title.'</a></div>';
+                                        echo '<div class=""><a href="'.URLROOT.'/home/viewed/'.$dsnoidung->IdNews.'" class="all_good_font">'.$dsnoidung->Title.'</a></div>';
                                         $id = $dsnoidung->IdNews;
                                         break;
                                     }
@@ -33,7 +33,7 @@
                                 <div class="all_suceeall_height_position_absolute"></div>
                                 <div class="all_suceeall_height_position_absolute_font_2">
                                     <div class=""><a href="#" class="color_fff"></a></div>';
-                            echo '<div class=""><a href="single.html" class="all_good_font_2"> '.$dsnoidung->Title.'</a></div>';
+                            echo '<div class=""><a href="'.URLROOT.'/home/viewed/'.$dsnoidung->IdNews.'" class="all_good_font_2"> '.$dsnoidung->Title.'</a></div>';
                             echo '
                             </div>
                             </div>';
@@ -62,7 +62,7 @@
                              <div class="all_latest_trading_img"><img src="./'.$dsnoidung->UrlPics.'" alt=""class="all_img_special_relative"/></div>
                              <div class="all_latest_trading_img_position_absolute"></div>
                              <div class="all_latest_trading_img_position_absolute_1">
-                                 <a href="single_new.html" class="text-white">'.$dsnoidung->Title.' </a>
+                                 <a href="'.URLROOT.'/home/viewed/'.$dsnoidung->IdNews.'" class="text-white">'.$dsnoidung->Title.' </a>
                              </div>
                          </div>
                      </div>';
@@ -94,7 +94,7 @@
                                                 <div class="all_hover_news_img">
                                                     <div class="all_news_img"><img src="'.$dsnoidung->UrlPics.'" alt=""/></div>
                                                     <div>
-                                                        <a href="single_hot.html" class="d-block all_small_post_heading"><span class="">'.$dsnoidung->Title.'</span></a>
+                                                        <a href="'.URLROOT.'/home/viewed/'.$dsnoidung->IdNews.'" class="d-block all_small_post_heading"><span class="">'.$dsnoidung->Title.'</span></a>
                                                     </div>
                                                 </div>
                                             </div> ';
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-7 animate-box">
-                                        <a href="single_hot.html" class="all_magna py-2">'.$dsnoidung->Title.'</a> <a href="#" class="all_mini_time py-3"> '.$dsnoidung->Overview.'</a>
+                                        <a href="'.URLROOT.'/home/viewed/'.$dsnoidung->IdNews.'" class="all_magna py-2">'.$dsnoidung->Title.'</a> <a href="#" class="all_mini_time py-3"> '.$dsnoidung->Overview.'</a>
                                         <div class="most_all_treding_font_123"> '.$dsnoidung->Day.'</div>
                                     </div>
                                     </div>';
@@ -144,7 +144,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-7 animate-box">
-                                            <a href="single_new.html" class="all_magna py-2">'.$dsnoidung->Title.'</a> <a href="single_new.html" class="all_mini_time py-3">'.$dsnoidung->Overview.'</a>
+                                            <a href="'.URLROOT.'/home/viewed/'.$dsnoidung->IdNews.'" class="all_magna py-2">'.$dsnoidung->Title.'</a> <a href="'.URLROOT.'/home/viewed/'.$dsnoidung->IdNews.'" class="all_mini_time py-3">'.$dsnoidung->Overview.'</a>
                                             <div class="most_all_treding_font_123 align="right">'.$dsnoidung->Day.'</div>
                                         </div>
                                     </div> ';
@@ -165,23 +165,26 @@
                             ?> 
                             </div>
                             <div>
-                                <div class="all_heading all_heading_border_bottom pt-3 py-2 mb-4">Tin phổ biến</div>
+                                <div class="all_heading all_heading_border_bottom pt-3 py-2 mb-4">Tin đã xem</div>
                             </div>
                             <div class="row pb-3">
                                 <?php
-                                    foreach($data['dsnoidung_view'] as $dsnoidung){
-                                        if($dsnoidung->Views > 10){
-                                        echo '<div class="col-5 align-self-center">
-                                        <img src="./'.$dsnoidung->UrlPics.'" alt="img" class="all_most_trading"/>
-                                                </div>
-                                                <div class="col-7 paddding">
-                                                    <div class="most_all_treding_font">'.$dsnoidung->Title.'</div>
-                                                    <div class="most_all_treding_font_123">'.$dsnoidung->Day.'</div>
-                                                </div> 
-                                                </br>
-                                    ';
-                                    }
-                                }   
+                                     if(!isset($data['dsview'])){
+                                         echo "<h5> Chưa có mục nào </h5>";
+                                     }
+                                     else{
+                                         foreach($data['dsview'] as $dsview){
+                                          foreach($dsview as $viewed)
+                                             echo '<div class="col-5 align-self-center">
+                                                    <img src="./'.$dsview->UrlPics.'" alt="img" class="all_most_trading"/>
+                                                            </div>
+                                                            <div class="col-7 paddding">
+                                                                <div class="most_all_treding_font">'.$dsview->Title.'</div>
+                                                                <div class="most_all_treding_font_123">'.$dsview->Day.'</div>
+                                                            </div> 
+                                                            </br>';
+                                         }
+                                      } 
                                 ?>
                                 </div>
                         </div>

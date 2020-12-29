@@ -26,7 +26,19 @@
                 "dsnoidung_view" => $dsnoidung_view,
             ]);
         }
-        function viewed($IdNews){
+        function viewed($param=null){
+            if($IdNews == null){
+                $this->view("home",[
+                    "pages" => "error",
+                ]);
+            }
+            else {
+                $IdNews = $param[0];
+            }
+            $ds_theloai = $this->theloaiModel->dstheloai();
+            $ds_loaitin= $this->loaitinModel->dsloaitin();
+            $dsnoidung_ASC = $this->noidungModel->dsnoidung_ASC();
+            $dsnoidung_view = $this->noidungModel->dsnoidung_view();
             $dsnoidung = $this->noidungModel->dsnoidung();
             if(!isset($_SESSION['username_0'])){
                 if($_SESSION['viewed'] != null){
@@ -40,9 +52,12 @@
                     $dsview[] = $this->noidungModel->get_noidung($list);
                 }
                 $this->view("home", [
-                    "pages"      => "home",
+                    "pages"      => "index",
                     "dsview"  => $dsview,
-                    "dsnoidung"  => $dsnoidung,
+                    "dsnoidung"  => $dsnoidung_ASC,
+                    "ds_loaitin"  => $ds_loaitin,
+                    "ds_theloai"  => $ds_theloai,
+                    "dsnoidung_view" => $dsnoidung_view,
                 ]);
             }
             else{
@@ -55,9 +70,12 @@
                     $dsview[] = $this->noidungModel->get_noidung($list->id_news);
                 }
                 $this->view("home", [
-                    "pages"      => "home",
+                    "pages"      => "index",
                     "dsview"  => $dsview,
-                    "dsnoidung"  => $dsnoidung,
+                    "dsnoidung"  => $dsnoidung_ASC,
+                    "ds_loaitin"  => $ds_loaitin,
+                    "ds_theloai"  => $ds_theloai,
+                    "dsnoidung_view" => $dsnoidung_view,
                 ]);
             }
         }
