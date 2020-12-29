@@ -29,20 +29,17 @@
             $params = $this->params;
             $controller->$action($params);
         }
-        
         // xu li thanh dia chi
         function UrlProcess(){
             if(isset($_GET["url"])) {
                return explode("/",filter_var(trim($_GET["url"],"/")));
             }
-                else {
-                    $arr[0] = $this->controller;
-                    array_shift($_GET['url']);
-                    $arr[1] = $this->action;
-                    array_shift($_GET['url']);
-                    $arr[2] = $_GET['url'];
-                    return $arr;
-                    }
+            else {
+                $arr[0] = $this->controller;
+                $arr[1] = $this->action;
+                $arr[2] = [];
+                return $arr;
+                }
         }
     
     }

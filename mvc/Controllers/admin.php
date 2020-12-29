@@ -81,6 +81,7 @@
                 unset($_SESSION['admin']);
                 unset($_SESSION['privileges']);
                 unset($_SESSION['IdUser']);
+                unset($_SESSION['Title']);
                 $this->view("admin",[
                     "pages" => "login",
                     "error" => "0",
@@ -602,12 +603,12 @@
                                     // Tạo folder mục nội dung tại
                                     if (!is_dir($dir.'noidung'))
                                     {
-                                        mkdir($dir.'noidung/', 0755, true);
+                                        mkdir($dir.'noidung/', 0777, true);
                                     } 
                                     // Tạo folder năm hiện tại
                                     if (!is_dir($dir.'noidung/'.$year_current))
                                     {
-                                        mkdir($dir.'noidung/'.$year_current.'/', 0755, true);
+                                        mkdir($dir.'noidung/'.$year_current.'/', 0777, true);
                                     } 
                                   
                                     // Tạo folder tháng hiện tại
@@ -1250,7 +1251,7 @@
             else{
                 if(isset($_SESSION['username'])){
                     $this->view("admin",[
-                        "pages" => "quangcao"
+                        "pages" => "admin",
                     ]);
                 }
                 else{

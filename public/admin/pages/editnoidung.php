@@ -26,6 +26,7 @@
                 <label for="UrlPics">Hình ảnh</label>
                 <img src="<?php echo URLROOT.'/'.$list_noidung->UrlPics;?>" alt="chưa có ảnh" class="rounded mx-auto d-block">
                 </div>
+                <input name="UrlPics" class="form-control" value="<?php echo $list_noidung->UrlPics;?>" readonly>
                 <div class="form-group">
                 <label for="Detail">Nội dung</label>
                 <textarea class="form-control" name="Detail" id="exampleFormControlTextarea1" placeholder="Nhập vào nội dung" rows="5"><?php echo $list_noidung->Detail;?></textarea>

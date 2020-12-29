@@ -7,16 +7,23 @@
             //$this->adminModel = $this->model("adminModel");
             $this->userModel = $this->model("usersModel");
             $this->noidungModel = $this->model("noidungModel");
+            $this->theloaiModel = $this->model("theloaiModel");
+            $this->loaitinModel = $this->model("loaitinModel");
             $this->newssaveModel = $this->model("newssaveModel");
         }
         function SayHi(){
-            $dsnoidung = $this->noidungModel->dsnoidung();
+            $ds_theloai = $this->theloaiModel->dstheloai();
+            $ds_loaitin= $this->loaitinModel->dsloaitin();
+            $dsnoidung_ASC = $this->noidungModel->dsnoidung_ASC();
+            $dsnoidung_view = $this->noidungModel->dsnoidung_view();
             //$tintuc = $this->tieudeModel->dsTintuc();
             //$user = $this->userModel->getUsers();
             $this->view("home", [
-                "pages"      => "home",
-                "dsnoidung"  => $dsnoidung,
-                
+                "pages"      => "index",
+                "dsnoidung"  => $dsnoidung_ASC,
+                "ds_loaitin"  => $ds_loaitin,
+                "ds_theloai"  => $ds_theloai,
+                "dsnoidung_view" => $dsnoidung_view,
             ]);
         }
         function viewed($IdNews){

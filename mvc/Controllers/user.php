@@ -7,14 +7,21 @@
             //$this->adminModel = $this->model("adminModel");
             $this->userModel = $this->model("usersModel");
             $this->noidungModel = $this->model("noidungModel");
+            $this->theloaiModel = $this->model("theloaiModel");
+            $this->loaitinModel = $this->model("loaitinModel");
+            $this->newssaveModel = $this->model("newssaveModel");
         }
         function SayHi(){
             $dsnoidung = $this->noidungModel->dsnoidung();
+            $ds_theloai = $this->theloaiModel->dstheloai();
+            $ds_loaitin= $this->loaitinModel->dsloaitin();
             //$tintuc = $this->tieudeModel->dsTintuc();
             //$user = $this->userModel->getUsers();
             $this->view("user", [
                 "pages"      => "login",
                 "dsnoidung"  => $dsnoidung,
+                "ds_loaitin"  => $ds_loaitin,
+                "ds_theloai"  => $ds_theloai,
                 
             ]);
         }
@@ -26,7 +33,7 @@
                 $infoUser = $this->userModel->GetInfoUser($idusers->IdUser);
                 $dsnoidung = $this->noidungModel->dsnoidung();
                 $this->view("user",[
-                    "pages" => "home",
+                    "pages" => "index",
                     "loged"     => "loged",
                     "infoUser"  => $infoUser,
                     "dsnoidung" => $dsnoidung,
@@ -120,7 +127,7 @@
                                     $token = md5($username)."LV".$level;
                                     $kq = $this->userModel->insertUser($fullname,$username,$password,$email,$level,$gender,$avatar,$RegisterDay,$Birthday,$permission,$token);
                                     $this->view("user",[
-                                        "pages"  => "login",
+                                        "pages"  => "index",
                                     ]);
                                 }
                                 else{

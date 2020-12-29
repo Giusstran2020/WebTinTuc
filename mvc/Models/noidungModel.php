@@ -13,6 +13,22 @@
 
             return $result;
         }
+        public function dsnoidung_ASC(){
+            // lấy hết ds tieu de và trả về 1 mảng
+            $this->db->query("SELECT * FROM news ORDER BY IdNews DESC");
+
+            $result = $this->db->resultSet();
+
+            return $result;
+        }
+        public function dsnoidung_view(){
+            // lấy hết ds tieu de và trả về 1 mảng
+            $this->db->query("SELECT * FROM news ORDER BY Views DESC");
+
+            $result = $this->db->resultSet();
+
+            return $result;
+        }
         public function dsnoidung_user($IdUser){
             // lấy hết ds tieu de và trả về 1 mảng
             $this->db->query("SELECT * FROM news WHERE IdUser =:IdUser");
