@@ -24,7 +24,7 @@ a:hover{
 <div id="wapper">
 	<img src="<?php echo URLROOT;?>/public/images/error-404.jpg" alt="Not found 404" title="Not found 404" />
     <h3>Page Not Found</h3>
-    <p align="right"><a href="<?php echo URLROOT;?>/admin">Về Trang Chủ</a></p>
+    <p align="right"><a href="<?php echo URLROOT;?>">Về Trang Chủ</a></p>
 </div>
 </body>
 </html>

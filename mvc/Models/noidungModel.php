@@ -13,7 +13,7 @@
 
             return $result;
         }
-        public function dsnoidung_ASC(){
+        public function dsnoidung_DESC(){
             // lấy hết ds tieu de và trả về 1 mảng
             $this->db->query("SELECT * FROM news ORDER BY IdNews DESC");
 
@@ -127,6 +127,24 @@
             }
 
             return $check;
+        }
+        public function rowCount(){
+            
+            $result = $this->db->rowCount();
+
+            return $result;
+        }
+        public function select_product_Limit($start,$limit){
+            
+            $this->db->query("SELECT * FROM news limit :start, :limit");
+
+            $this->db->bind(':start',$start);
+            $this->db->bind(':limit',$limit);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
         }
 }
 ?>

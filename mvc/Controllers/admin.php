@@ -14,6 +14,7 @@
             $this->theloaiModel = $this->model("theloaiModel");
             $this->loaitinModel = $this->model("loaitinModel");
             $this->adminModel = $this->model("adminModel");
+            $this->quangcaoModel = $this->model("quangcaoModel");
         }
         function SayHi(){
             if(isset($_SESSION['username']) || isset($_SESSION['admin'])){
@@ -1243,15 +1244,170 @@
         // Hết phần loại tin
         //Phần quảng cáo 
         function quangcao(){
+            $getquangcao = $this->quangcaoModel->dsquangcao();
+            $row = $this->quangcaoModel->rowCount();
             if(isset($_SESSION['admin'])){
                 $this->view("admin",[
-                    "pages" => "quangcao"
+                    "pages" => "quangcao",
+                    "getquangcao" => $getquangcao,
+                    "row" => $row 
                 ]);
             }
             else{
                 if(isset($_SESSION['username'])){
                     $this->view("admin",[
                         "pages" => "admin",
+                        "getquangcao" => $getquangcao,
+                    ]);
+                }
+                else{
+                    $this->view("admin",[
+                        "pages" => "login",
+                        "error" => "0"
+                    ]);
+                }
+            }
+        }
+        function addquangcao(){
+            $getquangcao = $this->quangcaoModel->dsquangcao();
+            $row = $this->quangcaoModel->rowCount();
+            if(isset($_SESSION['admin'])){
+                if(isset($_POST['btn_addquangcao'])){
+                $messages = array();
+                $messages['error'] = array();
+                // Đường dẫn file ảnh.
+                $url_img ='';
+                $target_dir    = "uploads/";
+                //Vị trí file lưu tạm trong server (file sẽ lưu trong uploads, với tên giống tên ban đầu)
+                $target_file   = $target_dir . basename($_FILES["UrlPics"]["name"]);
+                //Lấy phần mở rộng của file (jpg, png, ...)
+                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+                // Cỡ lớn nhất được upload (bytes)
+                $maxfilesize   = 100000000000;
+
+                ////Những loại file được phép upload
+                $allowtypes    = array('jpg', 'png', 'jpeg', 'gif','JPG', 'PNG', 'JPEG', 'GIF');
+                //Kiểm tra xem có phải là ảnh bằng hàm getimagesize
+                $check = getimagesize($_FILES["UrlPics"]["tmp_name"]);
+                if($check !== false)
+                {
+                    $messages['error'] =  "Đây là file ảnh - " . $check["mime"] . ".";
+                    $allowUpload = true;
+                }
+                else
+                {
+                    $messages['error'] = "Không phải file ảnh.";
+                    $allowUpload = false;
+                }
+                // Kiểm tra nếu file đã tồn tại thì không cho phép ghi đè
+                // Bạn có thể phát triển code để lưu thành một tên file khác
+                if (file_exists($target_file))
+                {
+                    $messages['error'] = "Tên file đã tồn tại trên server, không được ghi đè";
+                    $allowUpload = false;
+                }
+                // Kiểm tra kích thước file upload cho vượt quá giới hạn cho phép
+                if ($_FILES["UrlPics"]["size"] > $maxfilesize)
+                {
+                    $messages['error'] = "Không được upload ảnh lớn hơn $maxfilesize (bytes).";
+                    $allowUpload = false;
+                }
+                // Kiểm tra kiểu file
+                if (!in_array($imageFileType,$allowtypes))
+                {
+                    $messages['error'] = "Chỉ được upload các định dạng JPG, PNG, JPEG, GIF";
+                    $allowUpload = false;
+                }
+                if ($allowUpload)
+                {
+                        $dir = "./uploads/"; 
+                        $name_img = stripslashes($_FILES['UrlPics']['name']);
+                        $source_img = $_FILES['UrlPics']['tmp_name'];
+            
+                        // Lấy ngày, tháng, năm hiện tại
+                        $newday = date('Y,m,d');
+                        $day_current = substr($newday, 8, 2);
+                        $month_current = substr($newday, 5, 2);
+                        $year_current = substr($newday, 0, 4);
+                        // Tạo folder mục nội dung tại
+                        if (!is_dir($dir.'quangcao'))
+                        {
+                            mkdir($dir.'quangcao/', 0777, true);
+                        } 
+                        // Tạo folder năm hiện tại
+                        if (!is_dir($dir.'quangcao/'.$year_current))
+                        {
+                            mkdir($dir.'quangcao/'.$year_current.'/', 0777, true);
+                        } 
+                    
+                        // Tạo folder tháng hiện tại
+                        if (!is_dir($dir.'quangcao/'.$year_current.'/'.$month_current))
+                        {
+                            mkdir($dir.'quangcao/'.$year_current.'/'.$month_current.'/', 0777, true);
+                        }   
+                    
+                        // Tạo folder ngày hiện tại
+                        if (!is_dir($dir.'quangcao/'.$year_current.'/'.$month_current.'/'.$day_current))
+                        {
+                            mkdir($dir.'quangcao/'.$year_current.'/'.$month_current.'/'.$day_current.'/', 0777, true);
+                        }
+                    
+                        $path_img = $dir.'quangcao/'.$year_current.'/'.$month_current.'/'.$day_current.'/'.$name_img; // Đường dẫn thư mục chứa file
+                        // echo '<br> path_img: '.$path_img;
+                        // echo '<br> name_img: '.$name_img;
+                        
+                        move_uploaded_file($source_img, $path_img); // Upload file
+                        $tmp_type_img = explode("\.", $name_img);
+                        $type_img = array_pop($tmp_type_img); // Loại file
+                        $url_img = substr($path_img, 2); // Đường dẫn file
+                        $size_img = $_FILES['UrlPics']['size']; // Dung lượng file
+                        // echo '<br> type_img: '.$type_img;
+                        // echo '<br> url_img: '.$url_img;
+                        // echo '<br> size_img: '.$size_img;
+                        // xoa file anh
+                        // unlink($dir.$year_current.'/'.$month_current.'/'.$day_current.'/'.$name_img);
+                        // Thêm dữ liệu vào table
+                        // xóa file rỗng
+                        // rmdir($dir.'2020');
+                        $messages['error'] =  'Upload thành công.';
+                }else{
+                    $this->view("admin",[
+                        "pages" => "addquangcao",
+                        "messages"=> $messages,
+                        "result"=> "false"
+                    ]);
+                }
+                $AdsDescription = isset($_POST['AdsDescription']) ? $_POST['AdsDescription'] : "";
+                $URL = isset($_POST['URL']) ? $_POST['URL'] : "";
+                $_UrlPics = ($url_img != null) ? $url_img : '';
+                if($AdsDescription == null ||$URL == null || $_UrlPics == null){
+                    $this->view("admin",[
+                        "pages" => "addquangcao",
+                        "result"=> "false",
+                        "error" => 1
+                    ]);
+                }
+                else{
+                    $kq = $this->quangcaoModel->insert_quangcao($AdsDescription,$URL,$_UrlPics);
+                    $getquangcao = $this->quangcaoModel->dsquangcao();
+                    $row = $this->quangcaoModel->rowCount();
+                    $this->view("admin",[
+                        "pages" => "quangcao",
+                        "row" => $row,
+                    ]);
+                }
+            }
+            else{
+                $this->view("admin",[
+                    "pages" => "addquangcao",
+                ]);
+            }
+            }
+            else{
+                if(isset($_SESSION['username'])){
+                    $this->view("admin",[
+                        "pages" => "admin",
+                        "getquangcao" => $getquangcao,
                     ]);
                 }
                 else{

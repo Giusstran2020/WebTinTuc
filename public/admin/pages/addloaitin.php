@@ -7,7 +7,7 @@
     <li class="breadcrumb-item">
     <a href="#">Dashboard</a>
     </li>
-    <li class="breadcrumb-item active">Chi tiết loại tin</li>
+    <li class="breadcrumb-item active">Thêm loại tin</li>
 </ol>
 
 <!-- Icon Cards-->

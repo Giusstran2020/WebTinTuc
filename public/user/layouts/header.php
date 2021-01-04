@@ -7,13 +7,14 @@
     <link href="<?php echo URLROOT ?>/public/user/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="css/animate.css" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo URLROOT ?>/public/user/css/animate.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo URLROOT ?>/public/user/css/owl.carousel.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo URLROOT ?>/public/user/css/owl.theme.default.css" rel="stylesheet" type="text/css"/>
     <!-- Bootstrap CSS -->
     <link href="<?php echo URLROOT ?>/public/user/css/style_1.css" rel="stylesheet" type="text/css"/>
     <!-- Modernizr JS -->
     <script src="<?php echo URLROOT ?>/public/user/js/modernizr-3.5.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
     <title>Tin tức</title>
 </head>
 <body class="index">
@@ -23,18 +24,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-3 all_padding_menu">
-                    <img src="img/home/logo.png" alt="img" class="all_logo_width"/>
+                    <img src="<?php echo URLROOT?>/public/user/images/logo.png" alt="img" class="all_logo_width"/>
                 </div>
                 <div class="col-12 col-md-9 align-self-center all_mediya_right">
                     <div class="text-center d-inline-block">
-                        <a class="all_display_table"><div class="all_verticle_middle"><div class="wrap-search d-none d-lg-inline-block">
-                            <form action="">
-                                <button type="button">
+                        <a class="all_display_table"><div class="wrap-search d-none d-lg-inline-block">
+                            <form action="./" method="post" autocomplete="off" >
+                                <button type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                <input type="text" placeholder="Nhập từ khóa tìm kiếm">
+                                <div class="autocomplete">
+                                <input type="text" id="myInput" name="mynews" placeholder="Nhập từ khóa tìm kiếm">
+                                </div>
                             </form>
-                        </div></div></a>
+                        </div></a>
                     </div>
                     <div class="text-center d-inline-block">
                         <a class="all_display_table"><div class="all_verticle_middle"><i class="fa fa-linkedin"></i></div></a>

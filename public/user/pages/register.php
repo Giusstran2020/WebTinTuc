@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/user/CSS/login.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/user/css/login.css">
     <title>Đăng Kí</title>
 </head>
 <body>
@@ -23,7 +23,7 @@
                             <option value="Nữ"><p>Nữ</p></option>
                         </select>
                     </p>
-                </form>''
+                </form>
                    <p><button name="btn_submit" form="formlogin" type="submit">Đăng Kí</button></p>
 <?php
     if(isset($data['error'])){

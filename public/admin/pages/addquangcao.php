@@ -7,27 +7,24 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Thêm thể loại</li>
+            <li class="breadcrumb-item active">Thêm quảng cáo</li>
           </ol>
 
           <!-- Icon Cards-->
-            <form action="addtheloai" method="post" name="addUser">
+            <form action="addquangcao" method="post"  enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="theloai">Tên Thể Loại</label>
-                    <input type="text" name="theloai" class="form-control" required="required" placeholder="Tên Thể Loại">
+                    <label for="AdsDescription">Tên quảng cáo</label>
+                    <input type="text" name="AdsDescription" class="form-control" required="required" placeholder="Tên quảng cáo">
                 </div>
                 <div class="form-group">
-                    <label for="txt_STT">Số thứ tự</label>
-                    <input type="text"  name="txt_STT" class="form-control"required="required"  placeholder="Số thứ tự">
+                    <label for="URL">URL</label>
+                    <input type="text"  name="URL" class="form-control"required="required"  placeholder="URL">
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="level">Ẩn hiện tin</label>
-                    <select name="txt_anhien" class="form-control">
-                        <option value="0" selected>Ẩn</option>
-                        <option value="1">Hiện</option>
-                    </select>
+                <div class="form-group">
+                    <label for="UrlPics">Hình ảnh</label>
+                    <input type="file" name="UrlPics" id="pathpics">
                 </div>
-                <button type="submit" name="btn_addtheloai" class="btn btn-primary mb-2">Thêm</button>
+                <button type="submit" name="btn_addquangcao" class="btn btn-primary mb-2">Thêm</button>
             </form>
             <h3> 
             <?php if(isset($data["result"])){?>
