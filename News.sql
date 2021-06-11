@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`idadmin`, `Username`, `Password`, `FullName`) VALUES
-(1, 'admin', 'admin', 'Nguyễn Minh Nhựt');
+(1, 'admin', 'admin', 'Trần Văn Nam');
 
 -- --------------------------------------------------------
 
@@ -246,10 +246,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`IdUser`, `FullName`, `Username`, `Password`, `Email`, `RegisterDay`, `IdGroup`, `BirthDay`, `Gender`, `Avatar`, `privileges`, `token`) VALUES
-(11, 'Nguyễn admin', '191919', '123', 'tnasd@gmail.com', '2020-12-04', 1, '2000-02-02', 'Nam', 'http://localhost:8080/lab-03public/user/images/image.JPG', 1, '470793e036b9db245ac460dc89b15913LV1'),
-(22, 'Nguyễn minh Nhưt', 'admin', '1', 'MinhNhut@gmail.com', '2020-12-05', 1, '2000-02-02', 'Nam', 'http://localhost:8080/lab-03public/user/images/image.JPG', 1, '21232f297a57a5a743894a0e4a801fc3LV1'),
+(11, 'Nam admin', '191919', '123', 'tnasd@gmail.com', '2020-12-04', 1, '2000-02-02', 'Nam', 'http://localhost:8080/lab-03public/user/images/image.JPG', 1, '470793e036b9db245ac460dc89b15913LV1'),
+(22, 'Trần Văn Nam', 'admin', '1', 'MinhNhut@gmail.com', '2020-12-05', 1, '2000-02-02', 'Nam', 'http://localhost:8080/lab-03public/user/images/image.JPG', 1, '21232f297a57a5a743894a0e4a801fc3LV1'),
 (23, 'Nguễn Văn A', 'user0', '1', 'user0@gmail.com', '2020-12-06', 0, '2020-12-01', 'Nữ', 'koco', 4, '3d517fe6ebab7b8cfcf98db6259c8a59LV0'),
-(25, '1', '18521222', '1', '1', '2020-12-06', 1, '0000-00-00', '1', 'http://localhost:8080/lab-03public/user/images/image.JPG', 1, '12eb000c1b2225dab9e9d843393e4f87LV0'),
+(25, '1', '18521133', '1', '1', '2020-12-06', 1, '0000-00-00', '1', 'http://localhost:8080/lab-03public/user/images/image.JPG', 1, '12eb000c1b2225dab9e9d843393e4f87LV0'),
 (26, 'test_lab', 'test', '1', 'test_lab@gmail.com', '2020-12-07', 0, '2000-02-02', 'Nam', 'http://localhost:8080/lab-03public/user/images/image.JPG', 4, '098f6bcd4621d373cade4e832627b4f6LV0'),
 (27, 'Nguyễn Văn A', 'ngyenA', '1', 'ngyenA@gmail.com', '2020-12-01', 1, '2000-02-01', 'Nam', 'Nam', 1, '19f6d82df96c91b79ef3f8e2a0a35163LV1'),
 (28, 'Nguyễn Văn B', 'NguyenB', '1', 'NguyenB@gmail.com', '2020-12-03', 1, '2020-12-08', '1', '1', 1, 'def1a3334aef2257a75f4ab37d6e305dLV1'),
